@@ -1,0 +1,18 @@
+<h2>Tests</h2>
+<ul>
+	<% if @english %>
+		<%= render(:partial => "test", :locals => { :test => @english }) %>
+	<% else %>
+		<li><%= link_to "Add English Test", :controller => :test, :action => "new", :lang => "en" %>
+			<br/> There is no Spanish Test defined for this semester, add one by clicking this link
+			</li>
+	<% end %>
+	<% if @spanish %>
+		<%= render(:partial => "test", :locals => { :test => @spanish }) %>
+	<% else %>
+		<li><%= link_to "Add Spanish Test", :controller => :test, :action => "new", :language => "es" %><br/> There is no Spanish Test defined for this semester, add one by clicking this link</li>
+	<% end %>
+
+</ul>
+
+<%= link_to_back %>

@@ -1,0 +1,33 @@
+<%= error_messages_for :completion if @completion %>
+<h2>Words for <%=h @test.name %></h2>
+
+<ul id="sortable">
+	<% @completions.each do |completion| %>
+		<li id="completion_<%= completion.id %>">
+			<%=h completion.value %> <%= link_to icon("cancel"), {:controller => "test", 
+								   :action => "completion_delete",
+								   :id => completion.id },
+								 	{ :method => :post,
+									  :confirm => "Really delete this completion?"}%>
+		</li>
+	<% end %>
+</ul>
+
+<%= sortable_element 'sortable',
+ 					  :url => {:action => "completion_sort", :id => @test },
+					  :complete => visual_effect(:highlight, 'sortable')
+%>
+
+
+<% form_for :completion, :url => { :action => "completion_create" } do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<labelfor="value">Add completion:</label>
+	<%= f.text_area :value, :cols => 35, :rows => 10 %>
+	<%= f.hidden_field :test_set_id, :value => @test.id %>
+</li><br/>
+<p class="submit"><%= submit_tag 'Create' %></p>
+</ul>
+</fieldset>
+<% end -%>

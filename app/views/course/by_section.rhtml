@@ -1,0 +1,15 @@
+<h2>Courses Grouped by Section</h2>
+
+<% @sections.each do |section| %>
+	<h3><%=h section.name %></h3>
+	<ul>
+	<% section.courses.each do |course| %>
+		<li><%= link_to h(course.name), :controller => :course, 
+										:action => :edit, :id => course.id %>
+		</li>
+	<% end %>
+	<% if section.courses.count < 2 %>
+		<%= link_to "Add New Course", :action => :new, :section => section.id %>
+	<% end %>
+	</ul>
+<% end %>

@@ -1,0 +1,20 @@
+<h2>Greenword Login</h2>
+<% form_tag do %>
+<fieldset>	
+	<ul class="form">
+		<li>
+			<label for="login">Email</label>
+			<%= text_field_tag :login, params[:login] %>
+		</li><br/>
+
+		<li>
+			<label for="password">Password</label>
+			<%= password_field_tag 'password' %>
+		</li>
+
+		<p class="submit"><%= submit_tag 'Log in' %></p>
+	</ul>
+</fieldset>
+<% end -%>
+
+<p>If you do not have an account on greenword yet, then <%= link_to "sign up", :controller => :account, :action => :signup %></p>

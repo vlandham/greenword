@@ -1,0 +1,4 @@
+<tr id="waiting-<%= waiting_student.id -%>">
+<td><%= link_to waiting_student.whole_name, :controller => "user", :action => "edit", :id => waiting_student.id %></td>
+<td><%= link_to_remote icon("accept"), :url => {:controller => "user", :action => "admit", :id => waiting_student.id}, :html => {:method => "post"} %></td>
+</tr><br/>

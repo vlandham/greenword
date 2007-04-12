@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="author" content="Jim V"/>
+	<meta name="robots" content="indexall,followall"/>
+	
+	<title>Greenword | <%= controller.controller_name %>: <%= controller.action_name %></title>
+	<%= stylesheet_link_tag 'style' %>
+	<%= javascript_include_tag "prototype", "effects", "lowpro", "application" %>
+</head>
+
+<body>
+  <div id="wrapper">
+
+    <div id="header">
+      <%= link_to image_tag("logo.gif"), :controller => 'admin', :action => "index" %>
+      <ul id="top-nav">
+      	<li><%= link_to "home", :action => "index" %></li>
+      	<% if logged_in? %>
+			<li><%= link_to "logout", :action => "logout", :controller => "account" %></li> 
+		<% else %>
+      		<li><%= link_to "login", :action => "login", :controller => "account" %></li> 
+		<% end %>
+      </ul>
+    </div>
+	<div id="nav">
+		<ul>
+			<li><%= link_to "Tests", :controller => "test", :action => "index"%></li>
+			<li><%= link_to "Students", :controller => "/user", :action => "index" %></li>
+			<li><%= link_to "Courses", :controller => "/course", :action => "index" %></li>
+			<li><%= link_to "Section", :controller => "/section", :action => "index" %></li>
+			<li><%= link_to "Translate", :controller => :admin, :action => "translate" %></li>
+			<li><%= link_to "Results", :controller => :results, :action => "edit" %></li>
+		</ul>
+	</div>
+	<% if flash[:notice] %>
+		<div id="notice"><%= flash[:notice] %></div>
+	<% end -%>
+
+    <div id="content">
+		<%= yield :layout %>
+	</div>
+	<div id="footer">
+      <p>Designed by alpha[trout]</p>
+    </div>
+    
+  </div> 
+</body>
+</html>

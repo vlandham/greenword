@@ -1,0 +1,17 @@
+<%= error_messages_for :section %>
+
+<h2>Editing Section</h2>
+
+<% form_for :section do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<label for="name">Name</label>
+	<%= f.text_field :name %>
+</li>
+
+
+<p class="submit"><%= submit_tag 'Edit' %></p>
+</ul>
+</fieldset>	
+<% end -%>

@@ -1,0 +1,8 @@
+
+<li><%= link_to h(test.name), :controller => "test", :action => "edit", :id => test.id %> 
+	 <%= link_to icon("cancel"), {:controller => "test", 
+						   :action => "destroy",
+						   :id => test.id },
+						 	{ :method => :post,
+							  :confirm => "Really delete #{test.name} This will remove all words, completions and scenarios associated with this test"}%>
+</li>

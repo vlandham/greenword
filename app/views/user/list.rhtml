@@ -1,0 +1,8 @@
+<h2>All Students:</h2>
+<% @courses.each do |course| %>
+<h3><%= course.name %></h3>
+	<% students = course.users.find_students %>
+	<ul>
+		<%= render(:partial => "student", :collection => students) %>
+	</ul>
+<% end %>

@@ -1,0 +1,43 @@
+<h2>Translate</h2>
+<div id="language"><%= "Language: %s" / Locale.language.english_name %></div>
+<h3>Empty Translations</h3>
+<table>
+    <tr>
+		
+		<th>key</th>
+		
+		<th>translation</th>
+	</tr>
+    <% @view_translations.each do |tr| %>
+    	<tr>
+			
+			<td><%= tr.tr_key %></td>
+			
+    		<td><span id="tr_<%= tr.id %>">
+    		<%= render :partial => 'translation_text', :object => tr.text %></span></td>
+		</tr>
+    <%= in_place_editor "tr_#{tr.id}", :url => { :action => :set_translation_text, 
+    											 :id => tr.id }, 
+    								   :load_text_url => url_for({ :action => :translation_text,
+	 											 :id => tr.id }) %>
+    <% end %>
+
+</table>
+<h3>All Translations</h3>
+<table>
+	<% @all_translations.each do |tr| %>
+	<tr>
+		
+		<td><%= tr.tr_key %></td>
+		
+	 
+	 		<td><span id="tr_<%= tr.id %>"><%= render :partial => 'translation_text', :object => tr.text %></span></td>
+	</tr>
+    <%= in_place_editor "tr_#{tr.id}", :url => { :action => :set_translation_text, 
+    											 :id => tr.id }, 
+    								   :load_text_url => url_for({ :action => :translation_text,
+	 											 :id => tr.id }) 
+	%>
+  <% end %>
+	
+</table>

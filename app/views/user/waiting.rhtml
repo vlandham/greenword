@@ -1,0 +1,8 @@
+<h2 id="head">Waiting Students:</h2>
+<% @courses.each do |course| %>
+<h3><%= course.name %></h3>
+	<% students = course.users.find_waiting %>
+	<table>
+		<%= render(:partial => "waiting_student", :collection => students) %>
+	</table>
+<% end %>

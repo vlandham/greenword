@@ -1,0 +1,44 @@
+<%= error_messages_for :user %>
+<h2>Signup for a Greenword account</h2>
+
+<% form_for :user do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<label for="user_first_name">First Name</label>
+	<%= f.text_field :first_name %>
+</li><br/>
+<li>
+	<label for="user_last_name">Last Name</label>
+	<%= f.text_field :last_name %>
+</li><br/>
+<li>
+	<label for="user_login">Email</label>
+	<%= f.text_field :login %>
+</li><br/>
+
+<li>
+	<label for="user_password">Password</label>
+	<%= f.password_field :password %>
+</li><br/>
+
+<li>
+	<label for="password_confirmation">Confirm Password</label>
+	<%= f.password_field :password_confirmation %>
+</li><br/><br/>
+
+<li>
+	<label for="user_language">Language</label>
+	<%= f.select :language, User::LANGUAGES, :prompt => "Select language" %>
+</li><br/>
+
+<li>
+	<label for="section">Class</label>
+	<%= f.select( "course_id", @semester.courses.find(:all).collect {|c| [c.name, c.id] }) %>
+</li><br/>
+
+
+<p class="submit"><%= submit_tag 'Sign up' %></p>
+</ul>
+</fieldset>
+<% end -%>

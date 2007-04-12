@@ -1,0 +1,12 @@
+<h2>Courses for <%=h @semester.name %></h2>
+<h3>Current Courses</h3>
+<ul>
+<% @courses.each do |course| %>
+	<li><%= link_to course.name, :action => 'edit', :id => course.id %></li>
+<% end %>
+</ul>
+<h3>Options</h3>
+<ul>
+<li><%= link_to "New Course", :action => :new %></li>
+<li><%= link_to "Group by Section", :action => :by_section %></li>
+</ul>

@@ -1,0 +1,33 @@
+<%= error_messages_for :word if @word %>
+<h2>Words for <%=h @test.name %></h2>
+
+<ul id="sortable">
+	<% @words.each do |word| %>
+		<li id="word_<%= word.id %>">
+			<%=h word.value %> <%= link_to icon("cancel"), {:controller => "test", 
+								   :action => "word_delete",
+								   :id => word.id },
+								 	{ :method => :post,
+									  :confirm => "Really delete #{word.value}"}%>
+		</li>
+	<% end %>
+</ul>
+
+<%= sortable_element 'sortable',
+ 					  :url => {:action => "word_sort", :id => @test },
+					  :complete => visual_effect(:highlight, 'sortable')
+%>
+
+
+<% form_for :word, :url => { :action => "word_create" } do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<labelfor="value">Add Word:</label>
+	<%= f.text_field :value %>
+	<%= f.hidden_field :test_set_id, :value => @test.id %>
+</li><br/>
+<p class="submit"><%= submit_tag 'Create' %></p>
+</ul>
+</fieldset>
+<% end -%>

@@ -1,0 +1,7 @@
+<h3>Tests</h3>
+<ul>
+<% @tests.each do |test| %>
+	<li><%= link_to test.name, :action => "edit_test", :id => test.id %></li>
+<% end %>
+</ul>
+

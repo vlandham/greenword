@@ -1,0 +1,6 @@
+<h2>Editing Test: <%=h @test.name %></h2>
+<ul>
+<li><%= link_to "Edit/Add Words", :controller => "test", :action => "words", :id => @test  %></li>
+<li><%= link_to "Edit/Add Completions", :controller => "test", :action => "completions", :id => @test  %></li>
+<li><%= link_to "Edit Scenario", :controller => "test", :action => "scenario", :id => @test  %></li>
+</ul>

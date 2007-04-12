@@ -1,0 +1,16 @@
+<%= error_messages_for :scenario if @scenario %>
+<h2>Scenario for <%=h @test.name %></h2>
+<% if @scenario %>
+<% form_for :scenario, :url => { :action => "scenario" } do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<labelfor="value">Scenario:</label>
+	<%= f.text_area :value, :cols => 35, :rows => 10 %>
+	
+</li><br/>
+<p class="submit"><%= submit_tag 'Edit' %></p>
+</ul>
+</fieldset>
+<% end -%>
+<% end %>
