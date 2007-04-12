@@ -10,10 +10,10 @@
 # correspond to. The deploy_to path must be the path on each machine that will
 # form the root of the application path.
 
-set :application, "greenword"
+set :application, "gw2"
 set :svn_username, "vlandham"
 set :svn_password, "python13"
-set :repository, "http://tools.assembla.com/svn/#{application}/trunk"
+set :repository, "http://tools.assembla.com/svn/#{application}"
 
 # =============================================================================
 # ROLES
@@ -32,7 +32,7 @@ role :db,  "129.237.241.107", :primary => true
 # =============================================================================
 # OPTIONAL VARIABLES
 # =============================================================================
-# set :deploy_to, "/path/to/app" # defaults to "/u/apps/#{application}"
+set :deploy_to, "/home/vlandham/apps/#{application}" # defaults to "/u/apps/#{application}"
 set :user, "vlandham"            # defaults to the currently logged in user
 # set :scm, :darcs               # defaults to :subversion
 # set :svn, "/path/to/svn"       # defaults to searching the PATH
