@@ -16,6 +16,7 @@ task :configure_for_svn do
   system "svn remove tmp/*"
   system "svn commit -m 'Removing /tmp/ folder'"
   system 'svn propset svn:ignore "*" tmp/'
+  system "svn update tmp/"
 end
    
 desc "Add new files to subversion"
