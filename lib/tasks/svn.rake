@@ -8,11 +8,11 @@ task :configure_for_svn do
   system 'svn propset svn:ignore "*.db" db/'
   system "svn update db/"
   system "svn commit -m 'Ignoring all files in /db/ ending in .db'"
-  system "svn move config/database.yml config/database.example"
-  system "svn commit -m 'Moving database.yml to database.example to provide a template for anyone who checks out the code'"
-  system 'svn propset svn:ignore "database.yml" config/'
-  system "svn update config/"
-  system "svn commit -m 'Ignoring database.yml'"
+  # system "svn move config/database.yml config/database.example"
+  # system "svn commit -m 'Moving database.yml to database.example to provide a template for anyone who checks out the code'"
+  # system 'svn propset svn:ignore "database.yml" config/'
+  # system "svn update config/"
+  # system "svn commit -m 'Ignoring database.yml'"
   system "svn remove tmp/*"
   system "svn commit -m 'Removing /tmp/ folder'"
   system 'svn propset svn:ignore "*" tmp/'
