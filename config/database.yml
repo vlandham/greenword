@@ -14,7 +14,7 @@ development:
   adapter: mysql
   database: greenword_development
   username: root
-  password: 
+  password: M4ic@lly!
   host: localhost
   encoding: utf8
 
@@ -33,6 +33,6 @@ production:
   adapter: mysql
   database: greenword_production
   username: root
-  password: 
+  password: M4ic@lly!
   host: localhost
   encoding: utf8
