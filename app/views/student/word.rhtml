@@ -1,0 +1,25 @@
+<h2><%=h @current_test.name %></h2>
+<div id="inner-content">
+<%= form_remote_tag  :url => {:action => "next_word" }, 
+					 :html => { :id => 'test_form'} %>
+	<div id="word">
+		 <%= render :partial => "word", 
+					:locals => { :word => @last_word } %>
+	</div>
+
+		
+
+	 <% for @answer in @answers %>
+	<div class="answer">
+	  
+	   <% fields_for "answer[]" do |f| %>
+	     <p><%= f.text_field :value %></p>
+	   <% end %>
+
+	</div>
+	<br />
+	<% end %>
+	<%= submit_tag "next word" %>
+<%= end_form_tag %>
+
+</div>

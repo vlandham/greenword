@@ -1,0 +1,21 @@
+<h2><%= "Home Page".t %></h2>
+<%= "Welcome".t+" "+h(@user.whole_name) %>
+<ul>
+	<li>
+		<%= link_to "Word Test".t, :controller => :student, :action => :word %>
+	</li>
+	<li>
+		<%= link_to "Completion Test".t, :controller => :student, :action => :completion %>
+	</li>
+	<li>
+		<%= link_to "Scenario Test".t, :controller => :student, :action => :scenario %>
+	</li>
+	<li>
+		<%= link_to "Forum".t, :controller => :forum, :action => :index %>
+	</li>
+	<li>
+		<%= link_to "Results".t, :controller => :student, :action => :results %>
+	</li>
+
+	
+</ul>

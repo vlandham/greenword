@@ -1,0 +1,8 @@
+<h2>Results</h2>
+<% if @english %>
+<%= render(:partial => "view_test_set", :locals => {:test_set => @english}) %>
+<% end %>
+
+<% if @spanish %>
+	<%= render(:partial => "view_test_set", :locals => {:test_set => @spanish}) %>
+<% end %>
