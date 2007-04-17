@@ -13,12 +13,12 @@ ActionController::Routing::Routes.draw do |map|
   # -- just remember to delete public/index.html.
   # map.connect '', :controller => "welcome"
   map.home '/discussion/', :controller => 'discussion', :action => 'index'
-  # map.resources :forums, :controller => 'discussion'
-  # map.resources :forums, :controller => 'discussion' do |forum|
-    map.resources :topics, :controller => 'discussion' do |topic|
-      topic.resources :posts
+   # map.resources :forums, :controller => 'discussion'
+   map.resources :topics, :controller => 'discussion' do |topic|
+     topic.resources :posts
+   end
+    
       # topic.resource :monitorship, :controller => :monitorships
-    end
   # end
   
   

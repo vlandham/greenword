@@ -2,8 +2,8 @@ class Forum < ActiveRecord::Base
   acts_as_list
   belongs_to :semester
   validates_presence_of :name
-  
-  has_many :images
+  has_many :topics
+
   
   FORUM_TYPES = [
        ["Photo", "pho"],

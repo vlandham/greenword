@@ -1,2 +1,13 @@
-<h1>Image#new</h1>
-<p>Find me in app/views/image/new.rhtml</p>
+<%= error_messages_for :image %>
+
+<% form_for(:image, :url => {:action => "create", :controller => "image"}, 
+                      :html => { :multipart => true }) do |f| -%>
+  <p>
+    <label for="image">Upload An Image:</label>
+    <%= f.file_field :uploaded_data %>
+  </p>
+	<br/>
+  <p>
+    <%= submit_tag 'Create' %>
+  </p>
+<% end -%>

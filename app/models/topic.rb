@@ -1,6 +1,7 @@
 class Topic < ActiveRecord::Base
   belongs_to :forum, :counter_cache => true
   belongs_to :user
+  has_one :image
   # has_many :monitorships
   # has_many :monitors, :through => :monitorships, :conditions => ['monitorships.active = ?', true], :source => :user, :order => 'users.login'
 

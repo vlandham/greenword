@@ -1,0 +1,158 @@
+<% @page_title = @topic.title %>
+
+
+<% content_for :right do -%>
+
+<h5><%= _('Voices') %></h5>
+<ul class="flat talking">
+<% @topic.voices.each do | user | %>
+  <li><%=  h(user.first_name) %></li>
+<% end %>
+</ul>
+
+<% end # right content -%>
+
+
+<div class="crumbs">
+  <%= link_to h(@topic.forum.name), :action => "index" %> 
+</div>
+
+<h1 id="topic-title" style="margin-top:0.5em;"<%= %( onmouseover="$('topic_mod').show();" onmouseout="$('topic_mod').hide();") if logged_in? %>>
+
+
+  <%= h @topic.title %>
+  <% if @topic.locked? %>
+  <span><%= _('(locked)') %></span>
+  <% end %>
+  <% if logged_in? %>
+    <span style="display:none;" id="topic_mod">
+      <% if @topic.editable_by?(current_user) -%>
+        <%= link_to(_('edit'), {:action => :edit, :id => @topic.id}, :class => "utility") %> |
+        <%= link_to(_('delete'), {:action => :destroy, :id => @topic.id}, :class => "utility", :method => :delete, :confirm => _('Delete this topic forever?')) %>
+      <% end -%>
+    </span>
+  <% end %>
+</h1>
+
+<p class="subtitle">
+  
+  <%= pluralize @topic.posts.count, 'post' %>, <%= pluralize @topic.voice_count, 'voice' %>
+</p>
+
+<% if @post_pages.page_count > 1 -%>
+<p class="pages"><%= _('Pages:') %> <strong><%= pagination_links @post_pages, :window_size => 10 %></strong></p>
+<% end -%>
+
+<div id="image">
+	<%= link_to image_tag(@topic.image.public_filename(:medium)), @topic.image.public_filename %>
+</div>
+
+<a name="<%= @posts.first.id %>" id="<%= @posts.first.id %>">&nbsp;</a>
+
+<table border="0" cellspacing="0" cellpadding="0" class="posts wide">
+<% for post in @posts do %>
+<% unless post == @posts.first %>
+<tr class="spacer">
+  <td colspan="2">
+    <a name="<%= post.dom_id %>" id="<%= post.dom_id %>">&nbsp;</a>
+  </td>
+</tr>
+<% end %>
+<tr class="post hentry" id="<%= post.id %>-row">
+  <td class="author vcard">
+    <div class="date">
+      
+      <abbr class="updated" title="<%= post.created_at.xmlschema %>">
+      <%= time_ago_in_words(post.created_at) %>
+      </abbr>
+     
+    </div>
+
+    <%= avatar_for post.user %>
+    <span class="fn"><%=  truncate(h(post.user.display_name), 15) %></span>
+    
+
+    <% if logged_in? && post.editable_by?(current_user) -%>
+    <p>
+      <span class="edit">
+        <%= ajax_spinner_for "edit-post-#{post.id}", "spinner_bounce.gif" %>
+        <%= link_to_remote(_('Edit post'), 
+              {:url => edit_post_path(:topic_id => @topic, :id => post), :method => :get,
+               :before => "EditForm.init(#{post.id});", :condition => "!EditForm.isEditing(#{post.id})" }, 
+              {:href => edit_post_path(:topic_id => @topic, :id => post, :page => params[:page]), :class => "utility"}) %>
+      </span>
+    </p>
+    <% end -%>
+
+
+  </td>
+  <td class="body entry-content" id="post-body-<%= post.id %>">
+<!--
+    <%= link_to_function image_tag('clearbits/comment.gif', :class => 'icon reply'), "$('reply').toggle()" if logged_in? %>
+-->
+    <%= post.body_html %>
+  </td>
+</tr>
+
+<% end %>
+</table>
+
+<% if @post_pages and @post_pages.current.next %>
+<p style="float:right;"><%= link_to "Next page", { :page => @post_pages.current.next }.merge(params.reject{|k,v| k=="page"})  %></p>
+<% end %>
+
+<% if @post_pages.page_count > 1 -%>
+<p class="pages">Pages: <strong><%= pagination_links @post_pages, :window_size => 10 %></strong></p>
+<% end -%>
+
+<% if logged_in? %>
+<div id="edit"></div>
+<% if @topic.locked? %>
+<p>
+    <%= image_tag "clearbits/lock.gif", :class => "icon grey", :title => "Topic locked" %> 
+    <label>
+    <%= _('This topic is locked.') %></label>
+</p>
+<% else %>
+
+<p><%= link_to_function _('Reply to topic'), "ReplyForm.init()", :class => "utility" %></p>
+
+<div id="reply" class="editbox">
+<div class="container">
+  <%= content_tag 'p', h(flash[:bad_reply]), :class => 'notice' if flash[:bad_reply] %>
+  <% form_for :post, :url => posts_path(:forum_id => @forum, :topic_id => @topic, :page => @topic.last_page) do |f| -%>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td rowspan="2" width="70%">
+        <%= f.text_area :body, :rows => 8 %>
+      </td>
+      <td valign="top">
+
+
+        <h5><%= _('Formatting Help') %></h5>
+
+        <ul class="help">
+          <li><%= _('*bold*') %>
+          &nbsp; &nbsp; &nbsp;
+          <%= _('_italics_') %>
+          &nbsp; &nbsp; &nbsp;<br />
+          <%= _('bq. <span>(quotes)</span>') %></li>
+          <li>"IBM":http://www.ibm.com</li>
+          <li><%= _('* or # <span>(lists)</span>') %></li>
+        </ul>
+
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom" style="padding-bottom:15px;">
+       <%= submit_tag _("Save Reply") %><span class="button_or">or <%= link_to_function _('cancel'), "$('reply').hide()" %></span>
+     </td>
+   </tr>
+  </table>
+  <% end -%>
+</div>
+</div>
+<%= javascript_tag "$('reply').hide();"%>
+<% end %>
+<% end %>
+
