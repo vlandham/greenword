@@ -2,9 +2,18 @@ class Forum < ActiveRecord::Base
   acts_as_list
   belongs_to :semester
   validates_presence_of :name
+  
+  has_many :images
+  
+  FORUM_TYPES = [
+       ["Photo", "pho"],
+       ["Discussion", "dis"]
+     ]
 
   # has_many :moderatorships, :dependent => :destroy
   # has_many :moderators, :through => :moderatorships, :source => :user, :order => 'users.login'
+
+  validates_inclusion_of :forum_type, :in => FORUM_TYPES.map {|disp,value| value}
 
   has_many :topics, :order => 'sticky desc, replied_at desc', :dependent => :destroy do
     def first
@@ -29,6 +38,9 @@ class Forum < ActiveRecord::Base
   def self.find_discussion
      find(:first, :conditions => ["forum_type = ?", "dis"]) 
   end
-
+  
+  def self.find_photo
+    find(:first, :conditions => ["forum_type = ?", "pho"])
+  end
   # format_attribute :description
 end

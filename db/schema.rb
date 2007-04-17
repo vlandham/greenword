@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 33) do
+ActiveRecord::Schema.define(:version => 35) do
 
   create_table "answers", :force => true do |t|
     t.column "user_id",     :integer
@@ -83,10 +83,24 @@ ActiveRecord::Schema.define(:version => 33) do
     t.column "language_id",         :integer
     t.column "pluralization_index", :integer
     t.column "text",                :text
+    t.column "namespace",           :string
   end
 
   add_index "globalize_translations", ["tr_key", "language_id"], :name => "globalize_translations_tr_key_index"
   add_index "globalize_translations", ["table_name", "item_id", "language_id"], :name => "globalize_translations_table_name_and_item_and_language"
+
+  create_table "images", :force => true do |t|
+    t.column "parent_id",    :integer
+    t.column "forum_id",     :integer
+    t.column "content_type", :string
+    t.column "filename",     :string
+    t.column "thumbnail",    :string
+    t.column "size",         :integer
+    t.column "width",        :integer
+    t.column "height",       :integer
+    t.column "created_at",   :datetime
+    t.column "user_id",      :integer
+  end
 
   create_table "posts", :force => true do |t|
     t.column "user_id",    :integer

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :word_answers
   has_many :completion_answers
   has_many :scenario_answers
+  has_many :images
+  
   attr_protected :admitted
   attr_protected :admin
   LANGUAGES = [
