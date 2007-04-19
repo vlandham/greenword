@@ -1,6 +1,8 @@
 class GalleryController < ApplicationController
+  before_filter :admin_login_required, :only => [:new, :create, :update]
   before_filter :set_semester
   before_filter :find_forum_and_topic
+  # before_filter :set_layout
   
 
 #  before_filter :update_last_seen_at, :only => :show
@@ -62,7 +64,7 @@ class GalleryController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to :action => :index, :controller => :gallery }
-      format.xml  { head :created, :location => formatted_topic_url(:forum_id => @forum, :id => @topic, :format => :xml) }
+      # format.xml  { head :created, :location => formatted_topic_url(:forum_id => @forum, :id => @topic, :format => :xml) }
     end
   end
   
@@ -71,7 +73,7 @@ class GalleryController < ApplicationController
     assign_protected
     @topic.save!
     respond_to do |format|
-      format.html { redirect_to topic_path(@topic) }
+      format.html { redirect_to :action => :show, :id => @topic }
       format.xml  { head 200 }
     end
   end
@@ -80,7 +82,7 @@ class GalleryController < ApplicationController
     @topic.destroy
     flash[:notice] = "Topic '#{@topic.title}' was deleted."
     respond_to do |format|
-      format.html { redirect_to home_path }
+      format.html { redirect_to :controller => :gallery, :action => :index }
       format.xml  { head 200 }
     end
   end
@@ -91,7 +93,7 @@ class GalleryController < ApplicationController
     def assign_protected
       @topic.user     = current_user if @topic.new_record?
       # admins and moderators can sticky and lock topics
-      return unless admin? or current_user.moderator_of?(@topic.forum)
+      return unless admin?
       @topic.sticky, @topic.locked = params[:topic][:sticky], params[:topic][:locked] 
       # only admins can move
       return unless admin?
@@ -104,8 +106,16 @@ class GalleryController < ApplicationController
       @topic = @forum.topics.find(params[:id]) if params[:id]
     end
     
-    def authorized?
-      %w(new create).include?(action_name) || @topic.editable_by?(current_user)
+    # def authorized?
+    #      %w(new create).include?(action_name) || @topic.editable_by?(current_user)
+    #    end
+    
+    def set_layout  
+      if @current_user.admin?
+       render :layout => 'admin'
+      else
+        render :layout => 'application'
+      end
     end
     
 end

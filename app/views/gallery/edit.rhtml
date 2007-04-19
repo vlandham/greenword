@@ -2,7 +2,7 @@
 
 <%= error_messages_for :topic %>
 <% form_for :topic,
-     :url  => topic_path(@topic),
+     :url  => {:action => :update, :controller => :gallery, :id => @topic},
      :html => { :method => :put } do |f| -%>
 <%= render :partial => "form", :object => f %>
 <br />

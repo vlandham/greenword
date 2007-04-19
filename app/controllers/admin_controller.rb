@@ -42,6 +42,49 @@ class AdminController < ApplicationController
     @test = params[:id]
   end
   
+  def forums
+    @discussion = @semester.forums.find_discussion
+    @gallery = @semester.forums.find_photo
+  end
+  
+  def edit_forum
+    @forum = @semester.forums.find(params[:id])
+    return unless request.post?
+    @forum.update_attributes!(params[:forum])
+    redirect_to(:controller => 'admin', :action => 'forums')
+    flash[:notice] = "Forum edited"
+  rescue ActiveRecord::RecordInvalid
+    flash[:notice] = "Error in Forum Creation"
+    render :action => 'new_forum'
+  end
+  
+  def destroy_forum
+    if request.post?
+      forum = @semester.forums.find(params[:id])
+      begin
+        forum.destroy
+        flash[:notice] = "#{forum.name} deleted"
+        # redirect_to( :controller => 'test', :action => 'words', :id => test_id) and return
+      rescue Exception => e
+        flash[:notice] = e.message
+      end
+      redirect_to :controller => 'admin', :action => 'forums'
+    end
+  end
+  
+  def new_forum
+        @forum_type = params[:forum_type]
+        @forum = Forum.new(params[:forum])
+        @forum.semester_id = @semester.id
+        
+        return unless request.post?
+        @forum.save!     
+        redirect_to(:controller => 'admin', :action => 'forums')
+        flash[:notice] = "New Forum created"
+      rescue ActiveRecord::RecordInvalid
+        flash[:notice] = "Error in Forum Creation"
+        render :action => 'new_forum'
+  end
   
   
 end

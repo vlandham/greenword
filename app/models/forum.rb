@@ -2,7 +2,7 @@ class Forum < ActiveRecord::Base
   acts_as_list
   belongs_to :semester
   validates_presence_of :name
-  has_many :topics
+ 
 
   
   FORUM_TYPES = [

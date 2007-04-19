@@ -1,0 +1,17 @@
+<%= error_messages_for :forum %>
+
+<h2>Create a New Forum</h2>
+
+<% form_for :forum do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<labelfor="name">Name</label>
+	<%= f.text_field :name %>
+	<%= f.hidden_field :forum_type, :value => @forum_type %>
+	<%= f.text_area :description %>
+</li><br/>
+<p class="submit"><%= submit_tag 'Create' %></p>
+</ul>
+</fieldset>
+<% end -%>

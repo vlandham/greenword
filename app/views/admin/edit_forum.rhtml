@@ -1,0 +1,24 @@
+<h2>Editing Forum: <%=h @forum.name %></h2>
+<% form_for :forum, @forum, :url => {:action => "edit_forum" } do |f|  %>
+<ul class="form">
+<li>
+
+	<labelfor="name">Name</label>
+	<%= f.text_field :name %>
+</li>
+
+<li>	
+	<labelfor="description">Description</label>
+	<%= f.text_area :description %>
+</li>
+<li>
+<p class="submit"><%= submit_tag 'Edit' %></p>
+</li>
+</ul>
+<% end %>
+
+<%= link_to icon("cancel"), {:controller => "admin", 
+					   :action => "destroy_forum",
+					   :id => @forum.id },
+					 	{ :method => :post,
+						  :confirm => "Really delete #{@forum.name} This will remove all words, completions and scenarios associated with this test"}%>

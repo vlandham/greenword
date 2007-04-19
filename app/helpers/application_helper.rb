@@ -19,7 +19,9 @@ module ApplicationHelper
   end
   
   def admin?
-    @current_user.admin?
+    if(@current_user)
+      @current_user.admin?
+    end
   end
   
   def ajax_spinner_for(id, spinner="spinner.gif")

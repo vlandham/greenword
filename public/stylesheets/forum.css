@@ -718,8 +718,33 @@ div.thumbnail {
 	float: left;
 	padding:10px;
 	margin: 10px;
+	
+	
 
 }
+
+
+
+div.thumbnail a {
+	border: none;
+}
+
+div.thumbnail img {
+
+}
+
+div.thumbnail p {
+	text-align: center;
+	padding-top: 5px;
+	font-size: .7em;
+}
+
+div.thumbnail:hover {
+	background-color: #cdcdcd;
+	color: #000000;
+	
+}
+
 
 div.clearall {
 	clear: both;

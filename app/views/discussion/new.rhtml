@@ -3,15 +3,15 @@
 </div>
 
 
-<h1 id="new_topic"><%= _('New Topic') %></h1>
-<p class="subtitle"><%= _('by') %> <%= current_user.display_name %></p>
+<h1 id="new_topic"><%= "New Topic".t %></h1>
+<p class="subtitle"><%= "by".t %> <%= current_user.display_name %></p>
 
 
 <%= error_messages_for :topic %>
 <% form_for :topic,
      :url  => {:action => "create"} do |f| -%>
 <%= render :partial => "form", :object => f %>
-<%= submit_tag "Post Topic".t, :or => link_to('Cancel', :controller => :discussion, :action => :index) %>
+<%= submit_tag "Post Topic".t, :or => link_to("Cancel".t, :controller => :discussion, :action => :index) %>
 <% end -%>
 
 <%= javascript_tag "$('topic_title').focus();" %>

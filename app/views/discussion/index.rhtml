@@ -1,4 +1,4 @@
-<h2>Topics</h2>
+<h2><%= "Topics".t %></h2>
 <ul>
 <% @topics.each do |topic| %>
 <li>
@@ -8,5 +8,5 @@
 </ul>
 
 <% if admin? %>
-<%= link_to "new topic", :action => "new" %>	
+<%= link_to "new topic".t, :action => "new" %>	
 <% end %>

@@ -1,19 +1,22 @@
 <h2>Photos</h2>
-<div class="thumbnail">
+
 	
 
 <% @topics.each do |topic| %>
+<div class="thumbnail">
+	<%= link_to image_tag(topic.image.public_filename(:thumb)), 
+				:action => "show", :controller => "gallery", :id => topic.id %>
+	<p><%= link_to topic.title, :action => "show", :controller => "gallery", :id => topic.id %></p>
 
-	<%= link_to image_tag(topic.image.public_filename(:thumb)), :action => "show", :controller => "gallery", :id => topic.id %>
+</div>
 
 <% end %>
 
-</div>
 
 <div class="clearall">
 	
 </div>
 
 <% if admin? %>
-<%= link_to "new topic", :action => "new" %>	
+<%= link_to "new image".t, :action => "new" %>	
 <% end %>

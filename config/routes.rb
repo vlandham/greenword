@@ -14,10 +14,19 @@ ActionController::Routing::Routes.draw do |map|
   # map.connect '', :controller => "welcome"
   map.home '/discussion/', :controller => 'discussion', :action => 'index'
    # map.resources :forums, :controller => 'discussion'
-   map.resources :topics, :controller => 'discussion' do |topic|
-     topic.resources :posts
-   end
-    
+   # 
+    # map.resources :topics, :prefix_path => '/gallery', :controller => 'gallery' do |topic|
+    #       topic.resources :posts, :prefix_path =>'/gallery/'
+    #     end
+    #  
+    #   map.resources :topics, :prefix_path => '/discussion', :controller => 'discussion' do |topic|
+    #     topic.resources :posts
+    #   end
+   
+   map.resources :posts
+   
+   
+   
       # topic.resource :monitorship, :controller => :monitorships
   # end
   

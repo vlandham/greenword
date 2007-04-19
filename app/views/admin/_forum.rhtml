@@ -1,0 +1,8 @@
+
+<li><%= link_to h(forum.name), :controller => "admin", :action => "edit_forum", :id => forum.id %> 
+	<% if forum.forum_type == "pho" %>
+	 	<%= link_to_gallery %>
+	<% else %>
+		<%= link_to_discussion	 %>
+	<% end %>
+</li>

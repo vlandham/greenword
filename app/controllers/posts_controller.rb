@@ -1,4 +1,6 @@
+# Need to change the 'topic path ' stuff as we don't have that any more... use set_controller
 class PostsController < ApplicationController
+  before_filter :set_controller
   before_filter :find_post,      :except => [:index, :create, :monitored, :search]
   before_filter :login_required, :except => [:index, :monitored, :search, :show]
   @@query_options = { :per_page => 25, :select => 'posts.*, topics.title as topic_title, forums.name as forum_name', :joins => 'inner join topics on posts.topic_id = topics.id inner join forums on topics.forum_id = forums.id', :order => 'posts.created_at desc' }
@@ -35,7 +37,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @topic = Topic.find_by_id(params[:topic_id],:include => :forum)
+      
+    @topic = Topic.find_by_id(params[:topic_id])
     if @topic.locked?
       respond_to do |format|
         format.html do
@@ -51,10 +54,19 @@ class PostsController < ApplicationController
     @forum = @topic.forum
     @post  = @topic.posts.build(params[:post])
     @post.user = current_user
+     controller = :discussion
+      case @forum.forum_type
+      when 'dis'
+        controller = :discussion
+      when 'pho'
+        controller = :gallery
+      end
     @post.save!
     respond_to do |format|
+     
       format.html do
-        redirect_to topic_path( :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || '1')
+          redirect_to :controller => controller, :action => :show, :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || 1
+        # redirect_to topic_path( :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || '1')
       end
       format.xml { head :created, :location => formatted_post_url( :topic_id => params[:topic_id], :id => @post, :format => :xml) }
     end
@@ -62,7 +74,8 @@ class PostsController < ApplicationController
     flash[:bad_reply] = 'Please post something at least...'
     respond_to do |format|
       format.html do
-        redirect_to topic_path( :id => params[:topic_id], :anchor => 'reply-form', :page => params[:page] || '1')
+        # redirect_to topic_path( :id => params[:topic_id], :anchor => 'reply-form', :page => params[:page] || '1')
+     redirect_to :controller => @controller_type, :action => :show, :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || 1
       end
       format.xml { render :xml => @post.errors.to_xml, :status => 400 }
     end
@@ -95,10 +108,11 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "Post of '#{CGI::escapeHTML @post.topic.title}' was deleted."
     # check for posts_count == 1 because its cached and counting the currently deleted post
-    @post.topic.destroy and redirect_to forum_path(params[:forum_id]) if @post.topic.posts_count == 1
+    @post.topic.destroy and redirect_to :controller => @controller_type, :action => show, :id => params[:topic_id], :forum_id => params[:forum_id] if @post.topic.posts_count == 1
     respond_to do |format|
       format.html do
-        redirect_to topic_path(:forum_id => params[:forum_id], :id => params[:topic_id], :page => params[:page]) unless performed?
+        # redirect_to :forum_id => params[:forum_id], :id => params[:topic_id], :page => params[:page])
+        redirect_to(:controller => @controller_type, :action => show, :id => params[:topic_id], :forum_id => params[:forum_id]) unless performed?
       end
       format.xml { head 200 }
     end
@@ -119,5 +133,10 @@ class PostsController < ApplicationController
         format.rss  { render :action => "#{template_name}.rxml", :layout => false }
         format.xml  { render :xml => @posts.to_xml }
       end
+    end
+    
+    def set_controller
+      
+    
     end
 end
