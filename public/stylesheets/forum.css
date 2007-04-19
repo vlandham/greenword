@@ -727,6 +727,7 @@ div.thumbnail {
 
 div.thumbnail a {
 	border: none;
+	text-align: center;
 }
 
 div.thumbnail img {
