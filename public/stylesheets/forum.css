@@ -717,9 +717,7 @@ div.editbox ul.help {
 div.thumbnail {
 	float: left;
 	padding:10px;
-	margin: 10px;
-	
-	
+	margin: 10px;	
 
 }
 
@@ -727,7 +725,7 @@ div.thumbnail {
 
 div.thumbnail a {
 	border: none;
-	text-align: center;
+	
 }
 
 div.thumbnail img {
