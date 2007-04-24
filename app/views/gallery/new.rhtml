@@ -3,8 +3,8 @@
 </div>
 
 
-<h1 id="new_topic"><%= _('New Topic') %></h1>
-<p class="subtitle"><%= _('by') %> <%= current_user.display_name %></p>
+<h1 id="new_topic"><%= "New Topic".t %></h1>
+<p class="subtitle"><%= "by".t %> <%= current_user.display_name %></p>
 
 
 <%= error_messages_for :topic %>
@@ -15,7 +15,7 @@
 <%= f.file_field :uploaded_data %>
 </p>
 <br/>
-<%= submit_tag "Post Topic".t, :or => link_to('Cancel', :controller => :gallery, :action => :index) %>
+<%= submit_tag "Post Topic".t, :or => link_to("cancel".t, :controller => :gallery, :action => :index) %>
 <% end -%>
 
 

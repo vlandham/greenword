@@ -1,26 +1,25 @@
 <h3><%=h test_set.name if test_set%></h3>
 <h4>Words</h4>
-<table>
+
 <% visible_words = test_set.words.find_visible  %>
 <% visible_words.each do |word| %>
 	<%= render(:partial => "view_word", :locals => {:word => word}) %>
 <% end %>
-</table>
+
+<br/>
 
 <h4>Situations</h4>
 <% visible_completions = test_set.completions.find_visible  %>
-<table>
+
 <% visible_completions.each do |completion| %>
 	<%= render(:partial => "view_completion", :locals => {:completion => completion}) %>
 <% end %>
-</table>
 
+<br/>
 <h4>Scenario</h4>
 
 <% if test_set.scenario.visible? %>
-	<p>
 		<%= render(:partial => "view_scenario", :locals => {:scenario => test_set.scenario}) %>
-	</p>
 <% else %>
 	<p>No Scenario as of yet</p>
 <% end %>

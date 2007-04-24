@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
   # map.connect '', :controller => "welcome"
-  map.home '/discussion/', :controller => 'discussion', :action => 'index'
+  # map.home '/discussion/', :controller => 'discussion', :action => 'index'
    # map.resources :forums, :controller => 'discussion'
    # 
     # map.resources :topics, :prefix_path => '/gallery', :controller => 'gallery' do |topic|

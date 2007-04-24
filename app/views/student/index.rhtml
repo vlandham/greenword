@@ -1,5 +1,5 @@
-<h2><%= "Home Page".t %></h2>
-<%= "Welcome".t+" "+h(@user.whole_name) %>
+<h2><%=h @user.first_name+"'s Home Page".t %></h2>
+<p><%= "Welcome".t+" "+h(@user.whole_name) %></p>
 <ul>
 	<li>
 		<%= link_to "Word Test".t, :controller => :student, :action => :word %>
@@ -13,6 +13,10 @@
 	<li>
 		<%= link_to "Discussion".t, :controller => :discussion, :action => :index %>
 	</li>
+	<li>
+		<%= link_to "Image Gallery".t, :controller => :gallery, :action => :index %>
+	</li>
+	<br/>
 	<li>
 		<%= link_to "Results".t, :controller => :student, :action => :results %>
 	</li>

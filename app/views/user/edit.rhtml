@@ -1,19 +1,21 @@
-<%=h @student.whole_name %>
+<h2><%=h @student.whole_name %></h2>
 <!-- <%= @student.last_word || "no last word" %> -->
 <h3>Word Association Responses</h3>
+
+<%  @word_hash.each do |word, answers| %>
+<h4><%= word %></h4>
 <table>
-<% @word_answers.each do |answer| %>
-<% 	word = answer.word %>
-<tr>
-	<td>
-	<%=h word.value  %>
-	</td>	
-	<td>
-		<%=h answer.value %>
-	</td>
-</tr>
-<% end %>
+ <tr>
+	<% answers.each do |answer| %>
+
+		<td><%= answer %></td>
+
+	<% end %>
+ </tr>
 </table>
+
+<% end %>
+
 
 <h3>Completion Responses</h3>
 <table>
@@ -26,4 +28,11 @@
 </tr>
 <% end %>
 </table>
-<h3>Scenario Responses</h3>
+<h3>Scenario Response</h3>
+<% @scenario_answers.each do |answer| %>
+	<h4>Scenario Question:</h4>
+	<p><%= answer.scenario.value %></p>
+	<h4>Response: </h4>
+	<p><%= answer.value %></p>
+	
+<% end %>

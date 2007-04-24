@@ -30,8 +30,17 @@ class PostsController < ApplicationController
   end
 
   def show
+    @forum = @post.topic.forum
+    controller = :discussion
+    case @forum.forum_type
+    when 'dis'
+      controller = :discussion
+    when 'pho'
+      controller = :gallery
+    end
     respond_to do |format|
-      format.html { redirect_to topic_path(@post.forum_id, @post.topic_id) }
+      format.html { redirect_to :controller => controller, 
+        :action => :show, :id => params[:topic_id] }
       format.xml  { render :xml => @post.to_xml }
     end
   end
@@ -75,7 +84,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         # redirect_to topic_path( :id => params[:topic_id], :anchor => 'reply-form', :page => params[:page] || '1')
-     redirect_to :controller => @controller_type, :action => :show, :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || 1
+     redirect_to :controller => controller, :action => :show, 
+      :id => params[:topic_id], :anchor => @post.dom_id, :page => params[:page] || 1
       end
       format.xml { render :xml => @post.errors.to_xml, :status => 400 }
     end
@@ -90,13 +100,20 @@ class PostsController < ApplicationController
   
   def update
     @post.attributes = params[:post]
+    # controller = :discussion
+    #       case @forum.forum_type
+    #       when 'dis'
+    #         controller = :discussion
+    #       when 'pho'
+    #         controller = :gallery
+    #       end
     @post.save!
   rescue ActiveRecord::RecordInvalid
-    flash[:bad_reply] = 'An error occurred'
+    flash[:notice] = 'An error occurred'
   ensure
     respond_to do |format|
       format.html do
-        redirect_to topic_path(:id => params[:topic_id], :anchor => @post.id, :page => params[:page] || '1')
+        # redirect_to topic_path(:id => params[:topic_id], :anchor => @post.id, :page => params[:page] || '1')
         # redirect_to :action => :show, :id => params[:topic_id]
       end
       format.js
@@ -105,16 +122,31 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @forum = @post.topic.forum
+    controller = :discussion
+    case @forum.forum_type
+    when 'dis'
+      controller = :discussion
+    when 'pho'
+      controller = :gallery
+    end
+    
+    
     @post.destroy
     flash[:notice] = "Post of '#{CGI::escapeHTML @post.topic.title}' was deleted."
+    
+    
     # check for posts_count == 1 because its cached and counting the currently deleted post
-    @post.topic.destroy and redirect_to :controller => @controller_type, :action => show, :id => params[:topic_id], :forum_id => params[:forum_id] if @post.topic.posts_count == 1
-    respond_to do |format|
-      format.html do
-        # redirect_to :forum_id => params[:forum_id], :id => params[:topic_id], :page => params[:page])
-        redirect_to(:controller => @controller_type, :action => show, :id => params[:topic_id], :forum_id => params[:forum_id]) unless performed?
+    if( @post.topic.posts_count == 1)
+       @post.topic.destroy and redirect_to( :controller => controller, :action => :index)  and return
+    else
+      respond_to do |format|
+        format.html do
+           redirect_to( :controller => controller, :action => :show, 
+              :id => params[:topic_id], :page => params[:page]) unless performed?
+        end
+        format.xml { head 200 }
       end
-      format.xml { head 200 }
     end
   end
 

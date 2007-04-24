@@ -1,1 +1,9 @@
-<span id ="scenario-<%= scenario.id %>"><%=h truncate(scenario.value, 40) %> </span>
+<div id="answer-set">
+	<p id ="scenario-<%= scenario.id %>"><%=h truncate(scenario.value, 50) %> </p>
+	<ul>
+		<% scenario.scenario_answers.each do |answer| %>
+			<li><%= answer.value %></li>
+		<% end %>
+	</ul>
+
+</div>

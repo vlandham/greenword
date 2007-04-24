@@ -1,3 +1,14 @@
-<tr id="completion-<%= completion.id -%>">
-	<td><%=  completion.value %></td> 
-</tr>
+<div id="answer-set">
+	<h4>Question:</h4>
+	<p id="scenario-<%= completion.id -%>"><%= completion.value %></p>
+	
+	<% completion.completion_answers.each_with_index do |answer,i| %>
+	<div class="word-answer <%= cycle("even", "odd") -%>">
+		<%= answer.value %>
+	</div>
+	
+	<% end %>
+	
+</div>
+
+

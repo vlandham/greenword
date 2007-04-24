@@ -3,7 +3,7 @@
 
 <% content_for :right do -%>
 
-<h5><%= _('Voices') %></h5>
+<h5><%= "Voices".t %></h5>
 <ul class="flat talking">
 <% @topic.voices.each do | user | %>
   <li><%=  h(user.first_name) %></li>
@@ -22,13 +22,13 @@
 
   <%= h @topic.title %>
   <% if @topic.locked? %>
-  <span><%= _('(locked)') %></span>
+  <span><%= "(locked)".t %></span>
   <% end %>
   <% if logged_in? %>
     <span style="display:none;" id="topic_mod">
       <% if @topic.editable_by?(current_user) -%>
-        <%= link_to(_('edit'), {:action => :edit, :id => @topic.id}, :class => "utility") %> |
-        <%= link_to(_('delete'), {:action => :destroy, :id => @topic.id}, :class => "utility", :method => :delete, :confirm => _('Delete this topic forever?')) %>
+        <%= link_to("edit".t, {:action => :edit, :id => @topic.id}, :class => "utility") %> |
+        <%= link_to("delete".t, {:action => :destroy, :id => @topic.id}, :class => "utility", :method => :delete, :confirm => _('Delete this topic forever?')) %>
       <% end -%>
     </span>
   <% end %>
@@ -76,7 +76,7 @@
     <p>
       <span class="edit">
         <%= ajax_spinner_for "edit-post-#{post.id}", "spinner_bounce.gif" %>
-        <%= link_to_remote(_('Edit post'), 
+        <%= link_to_remote("Edit post".t, 
               {:url => edit_post_path(:topic_id => @topic, :id => post), :method => :get,
                :before => "EditForm.init(#{post.id});", :condition => "!EditForm.isEditing(#{post.id})" }, 
               {:href => edit_post_path(:topic_id => @topic, :id => post, :page => params[:page]), :class => "utility"}) %>
@@ -87,9 +87,7 @@
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">
-<!--
-    <%= link_to_function image_tag('clearbits/comment.gif', :class => 'icon reply'), "$('reply').toggle()" if logged_in? %>
--->
+
     <%= post.body_html %>
   </td>
 </tr>
@@ -111,11 +109,11 @@
 <p>
     <%= image_tag "clearbits/lock.gif", :class => "icon grey", :title => "Topic locked" %> 
     <label>
-    <%= _('This topic is locked.') %></label>
+    <%= "This topic is locked".t %></label>
 </p>
 <% else %>
 
-<p><%= link_to_function _('Reply to topic'), "ReplyForm.init()", :class => "utility" %></p>
+<p><%= link_to_function "Reply to topic".t, "ReplyForm.init()", :class => "utility" %></p>
 
 <div id="reply" class="editbox">
 <div class="container">
@@ -129,15 +127,13 @@
       <td valign="top">
 
 
-        <h5><%= _('Formatting Help') %></h5>
+        <h5><%= "Formatting Help".t %></h5>
 
         <ul class="help">
-          <li><%= _('*bold*') %>
-          &nbsp; &nbsp; &nbsp;
-          <%= _('_italics_') %>
-          &nbsp; &nbsp; &nbsp;<br />
-          <%= _('bq. <span>(quotes)</span>') %></li>
-          <li>"IBM":http://www.ibm.com</li>
+          <li><%= "*bold*".t %>
+          <br />
+          <%= "_italics_".t %>
+          <br />
           <li><%= _('* or # <span>(lists)</span>') %></li>
         </ul>
 
@@ -145,7 +141,7 @@
     </tr>
     <tr>
       <td valign="bottom" style="padding-bottom:15px;">
-       <%= submit_tag _("Save Reply") %><span class="button_or">or <%= link_to_function _('cancel'), "$('reply').hide()" %></span>
+       <%= submit_tag "Save Reply".t %><span class="button_or">or <%= link_to_function "cancel".t, "$('reply').hide()" %></span>
      </td>
    </tr>
   </table>

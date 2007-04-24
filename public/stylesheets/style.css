@@ -141,6 +141,9 @@ a:visited {
 	margin:16px 0px 5px 0px;
 }
 
+#content h4 {
+	color: #000000;
+}
 
 /*Listing of students / admins / whatever done in tables */
 .people-list {
@@ -369,6 +372,34 @@ p.submit input:hover {
 	float: right;
 	margin: 5px;
 }
+
+/*Student Result Section*/
+#answer-set {
+	clear:both;
+	padding:10px;
+	margin: 10px;
+	padding-bottom: 15px;
+}
+#answer-set p {
+	padding-bottom: 10px;
+	color: #444444;
+}
+
+.word-answer {
+	float:left;
+	padding:10px;
+	margin-bottom: 5px;
+}
+
+.odd {
+	
+}
+
+.even {
+	background-color: #dddddd;
+	color: #333333;
+}
+
 /*END Content*/
 
 

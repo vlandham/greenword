@@ -18,6 +18,7 @@ class UserController < ApplicationController
   def edit
    @student = @semester.users.find(params[:id])
    @word_answers = @student.word_answers.find(:all)
+   @word_hash = split_into_hash_of_arrays(@word_answers) { |ans| ans.word } 
    @completion_answers = @student.completion_answers.find(:all)
    @scenario_answers = @student.scenario_answers.find(:all)
   end
@@ -35,6 +36,18 @@ class UserController < ApplicationController
         page.visual_effect :shake, 'head'
       end
     end
+  end
+  
+  def split_into_hash_of_arrays(arry)
+    hash = Hash.new
+    for element in arry
+      expr = yield(element)
+      if not hash.has_key? expr.value
+        hash[expr.value] = []
+      end
+      hash[expr.value].push element.value
+    end
+    hash
   end
   
 end

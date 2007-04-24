@@ -1,3 +1,11 @@
-<tr id="word-<%= word.id -%>">
-	<td><%= word.value %></td> 	
-</tr>
+<div id="answer-set">
+<h4 id="word-<%= word.id -%>"><%= word.value %></h4>
+
+
+	<% word.word_answers.each_with_index do |answer,i| %>
+	<div class="word-answer <%= cycle("even", "odd") -%>">
+		<%= answer.value %>
+	</div>
+	
+	<% end %>
+</div>
