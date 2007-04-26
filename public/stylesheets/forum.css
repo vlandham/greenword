@@ -744,6 +744,11 @@ div.thumbnail:hover {
 	
 }
 
+#over-image {
+	
+	padding: 20px;
+}
+
 
 div.clearall {
 	clear: both;

@@ -44,7 +44,8 @@
 <% end -%>
 
 <div id="image">
-	<%= link_to image_tag(@topic.image.public_filename(:medium)), @topic.image.public_filename %>
+	 <%= link_to_remote_redbox image_tag(@topic.image.public_filename(:medium)), :url => {:controller => 'gallery', :action => 'show_image', :id => @topic.id} %>
+	
 </div>
 
 <a name="<%= @posts.first.id %>" id="<%= @posts.first.id %>">&nbsp;</a>

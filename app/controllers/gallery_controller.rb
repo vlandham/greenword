@@ -2,7 +2,7 @@ class GalleryController < ApplicationController
   before_filter :admin_login_required, :only => [:new, :create, :update]
   before_filter :set_semester
   before_filter :find_forum_and_topic
-  # before_filter :set_layout
+  layout 'application', :except => :show_image
   
 
 #  before_filter :update_last_seen_at, :only => :show
@@ -85,6 +85,10 @@ class GalleryController < ApplicationController
       format.html { redirect_to :controller => :gallery, :action => :index }
       format.xml  { head 200 }
     end
+  end
+  
+  def show_image
+    
   end
   
    
