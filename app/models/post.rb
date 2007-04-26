@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  acts_as_ferret
   belongs_to :forum, :counter_cache => true
   belongs_to :user,  :counter_cache => true
   belongs_to :topic, :counter_cache => true
@@ -15,9 +16,27 @@ class Post < ActiveRecord::Base
     user && (user.id == user_id || user.admin? )
   end
   
+  def self.find_discussion_posts(user_id)
+     find_by_sql ["SELECT * FROM posts, forums WHERE posts.forum_id = forums.id AND forums.forum_type = 'dis' AND posts.user_id = ?", user_id]
+   end
+   
+   def self.find_gallery_posts(user_id)
+      find_by_sql ["SELECT * FROM posts, forums WHERE posts.forum_id = forums.id AND forums.forum_type = 'pho' AND posts.user_id = ?", user_id]
+    end
+  
   def to_xml(options = {})
     options[:except] ||= []
     options[:except] << :topic_title << :forum_name
     super
+  end
+  
+  def forum_controller
+    forum_type =""
+    if(forum.forum_type == 'pho')
+      forum_type = "gallery"
+    else
+      forum_type = "discussion"
+    end
+    forum_type
   end
 end

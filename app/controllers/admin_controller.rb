@@ -33,6 +33,16 @@ class AdminController < ApplicationController
     
   end
   
+  def results
+    if request.post?
+     @search_term = params[:search][:search]
+     @results = Post.find_by_contents(@search_term)
+   else
+     redirect_to :action => :search
+   end
+   
+   end
+  
   def test
     @semester = Semester.find(1)
     @tests = @semester.tests.find(:all)

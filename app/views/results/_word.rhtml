@@ -1,4 +1,4 @@
 <tr id="word-<%= word.id -%>">
-	<td><%= word.value %></td> 
+	<td><%= link_to word.value, :action => :show, :id => word, :type => 'word' %></td> 
 	<td><%= switcher(word, "word") %></td>
 </tr>

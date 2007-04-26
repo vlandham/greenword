@@ -12,6 +12,25 @@ class ResultsController < ApplicationController
      @spanish = @semester.test_sets.find_spanish
   end
   
+  def show
+    type = params[:type]
+    @item
+    @answers
+    @hash_ans
+    case(type)
+    when 'word'
+      @item = Word.find(params[:id])
+      @answers = @item.word_answers
+    when 'comp'
+      @item = Completion.find(params[:id])
+      @answers = @item.completion_answers
+    when 'sen'
+      @item = Scenario.find(params[:id])
+      @answers = @item.scenario_answers
+    end
+    @hash_ans = split_into_hash_of_arrays(@answers) { |ans| ans.user } 
+  end
+  
   
   def toggle_word
     return unless request.post?
@@ -72,6 +91,18 @@ class ResultsController < ApplicationController
         page.visual_effect :shake, 'head'
       end
     end
+  end
+  
+  def split_into_hash_of_arrays(arry)
+    hash = Hash.new
+    for element in arry
+      expr = yield(element)
+      if not hash.has_key? expr
+        hash[expr] = []
+      end
+      hash[expr].push element
+    end
+    hash
   end
   
 end

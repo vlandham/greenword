@@ -1,1 +1,2 @@
-<span id ="scenario-<%= scenario.id %>"><%=h truncate(scenario.value, 40) %> <%= switcher(scenario, "scenario") %></span>
+<span id ="scenario-<%= scenario.id %>"><%=link_to truncate(scenario.value, 40), :action => :show,
+ 				:id => scenario.id, :type => 'sen'  %> <%= switcher(scenario, "scenario") %></span>

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :completion_answers
   has_many :scenario_answers
   has_many :images
+  has_many :posts
   
   attr_protected :admitted
   attr_protected :admin
@@ -40,6 +41,8 @@ class User < ActiveRecord::Base
     u = find_by_login(login) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
+  
+  
   
   def whole_name
     first_name+" "+last_name

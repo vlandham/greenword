@@ -21,7 +21,15 @@ class UserController < ApplicationController
    @word_hash = split_into_hash_of_arrays(@word_answers) { |ans| ans.word } 
    @completion_answers = @student.completion_answers.find(:all)
    @scenario_answers = @student.scenario_answers.find(:all)
+   @discussion_posts = Post.find_discussion_posts(@student.id)
+   @gallery_posts = Post.find_gallery_posts(@student.id)
   end
+  
+  def stats
+     @student = @semester.users.find(params[:id])
+  end
+  
+ 
   
   def admit
     return unless request.post?

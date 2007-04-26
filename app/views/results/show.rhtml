@@ -1,0 +1,22 @@
+
+<h3> <%= @item.value %></h3>
+
+<% @hash_ans.each do |user, answers| %>
+
+<h4><%= link_to user.whole_name, :controller => :user, :action => :edit, :id => user %></h4>
+<table>
+<tr>
+	<% answers.each do |answer| %>
+	<td>
+		<%= answer.value -%>
+	</td>
+	<% end %>
+	
+</tr>
+
+
+
+</table>
+<% end %>
+
+<%= link_to_back %>

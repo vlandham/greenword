@@ -1,4 +1,4 @@
 <tr id="completion-<%= completion.id -%>">
-	<td><%=  completion.value %></td> 
+	<td><%= link_to completion.value, :action => :show, :id => completion, :type => 'comp' %></td> 
 	<td><%= switcher(completion, "completion") %></td>
 </tr>

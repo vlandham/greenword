@@ -2,6 +2,8 @@
 <!-- <%= @student.last_word || "no last word" %> -->
 <h3>Word Association Responses</h3>
 
+<%= link_to "Student Statistics", :action => :stats, :id => @student %>
+
 <%  @word_hash.each do |word, answers| %>
 <h4><%= word %></h4>
 <table>
@@ -36,3 +38,37 @@
 	<p><%= answer.value %></p>
 	
 <% end %>
+
+<h3>Discussion Posts</h3>
+<table>
+<% @discussion_posts.each do |post| %>
+	<tr>
+		<td>
+			<%= post.body_html %>
+		</td>
+		<td>
+			<%= link_to post.topic.title, :controller => :discussion, 
+												:action => :show, :id => post.topic_id %>
+		</td>
+	</tr>
+
+<% end %>
+</table>
+
+<h3>Gallery Posts</h3>
+<table>
+
+	<% @gallery_posts.each do |post| %>
+		<tr>
+			<td>
+				<%= post.body_html %>
+			</td>
+			<td>
+				<%= link_to post.topic.title, :controller => :gallery, 
+													:action => :show, :id => post.topic_id %>
+			</td>
+		</tr>
+	<% end %>
+
+
+</table>
