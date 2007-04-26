@@ -2,10 +2,10 @@
 <% @results.each do |result| %>
 <tr>
 	<td>
-		<%=  highlight(excerpt(result.body_html, @search_term, 8), @search_term) %>
+		<%= highlight_all_words(result.body_html, @search_term)%>
 	</td>
 	<td>
-		<%= link_to "Topic", :controller => result.forum_controller, :action => :show,
+		<%= link_to "Go to Topic", :controller => result.forum_controller, :action => :show,
 		 					:id => result.topic_id %>
 	</td>
 </tr>
