@@ -1,0 +1,28 @@
+<h2>Forum Stats</h2>
+
+<% @forums.each do |forum| %>
+	<h3><%= forum.name %></h3>
+	<p>Total posts:<%= forum.posts.size %></p>
+	<br/>
+	<% popular_topics = forum.topics.find_popular(5) %>
+	<h4>Top Topics</h4>
+	<table>
+	<% popular_topics.each do |topic| %>
+			
+			<tr>
+				<td>
+					<%= link_to truncate(topic.title), :controller => topic.controller,
+					 								   :action => :show, :id => topic.id  %>
+				</td>
+				<td>
+					<%= topic.posts_count %>
+				</td>
+				<td>
+					<%= topic.posts.find_english_posts.size %>
+				</td>
+			</tr>
+		
+	<% end %>
+	</table>
+
+<% end %>

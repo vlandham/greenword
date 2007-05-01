@@ -1,1 +1,25 @@
-<h2>What do you want here?</h2>
+<h2>Statistics for: <%= @student.whole_name %></h2>
+
+<h3>Forums</h3>
+<div id="details" >	
+<table>
+	<tr><th>Post</th><th>Words</th><th>Date</th></tr>
+	<%- total = 0 -%>
+	<% @posts.each do |post| %>
+		<tr>
+			<td><%= truncate(post.body_html) %></td>
+			<% size = post.body.split(' ').size %>
+			<td><%= size.to_s %></td>
+			<%- total += size  -%>
+			<td><%= time_ago_in_words(post.created_at) %></td>
+		</tr>
+	<% end %>
+</table>
+</div>
+<br/>
+<p>Total Number of Posts: <%= @posts.size %></p>
+<br/>
+<p>Average Words / Post: <%= total / @posts.size %></p>
+
+
+

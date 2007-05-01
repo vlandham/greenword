@@ -58,6 +58,19 @@ class Topic < ActiveRecord::Base
     user && (user.id == user_id || user.admin?)
   end
   
+  def self.find_popular(limit = 10)
+    find(:all, :limit => limit, :order => "posts_count DESC")
+  end
+  
+  
+  def controller
+    controller = "discussion"
+    if(forum.forum_type == "pho")
+      controller = "gallery"
+    end
+    controller
+  end
+  
   protected
     def set_default_replied_at_and_sticky
       self.replied_at = Time.now.utc

@@ -23,6 +23,10 @@ class Post < ActiveRecord::Base
    def self.find_gallery_posts(user_id)
       find_by_sql ["SELECT * FROM posts, forums WHERE posts.forum_id = forums.id AND forums.forum_type = 'pho' AND posts.user_id = ?", user_id]
     end
+    
+    def self.find_english_posts
+      find_by_sql ["SELECT * FROM posts, forums, users WHERE posts.forum_id = forums.id AND posts.user_id = users.id AND users.language = 'en'"]
+    end
   
   def to_xml(options = {})
     options[:except] ||= []
