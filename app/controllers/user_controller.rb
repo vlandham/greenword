@@ -27,7 +27,7 @@ class UserController < ApplicationController
   
   def stats
      @student = @semester.users.find(params[:id])
-     @posts = @student.posts.find(:all)
+     @posts = @student.posts.find_recent
   end
   
  

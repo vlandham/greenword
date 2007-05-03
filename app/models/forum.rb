@@ -41,5 +41,10 @@ class Forum < ActiveRecord::Base
   def self.find_photo
     find(:first, :conditions => ["forum_type = ?", "pho"])
   end
+  
+# this doesn't work  
+  def count_english_posts
+     posts.count_by_sql("SELECT COUNT(*) FROM posts LEFT JOIN forums ON posts.forum_id = #{id} LEFT JOIN users ON users.id = posts.user_id AND users.language = 'en'")
+  end
   # format_attribute :description
 end

@@ -3,6 +3,7 @@
 <% @forums.each do |forum| %>
 	<h3><%= forum.name %></h3>
 	<p>Total posts:<%= forum.posts.size %></p>
+		<%= forum.count_english_posts %>
 	<br/>
 	<% popular_topics = forum.topics.find_popular(5) %>
 	<h4>Top Topics</h4>
@@ -17,12 +18,17 @@
 				<td>
 					<%= topic.posts_count %>
 				</td>
-				<td>
-					<%= topic.posts.find_english_posts.size %>
-				</td>
 			</tr>
 		
 	<% end %>
 	</table>
 
+	
+
 <% end %>
+
+<h4>Posts in Last 30 Days</h4>
+<div class="graph">
+	<img src="<%= url_for :controller => "stats", :action=> "forum_stats" %>" style="border:1px solid #aabcca;" />
+</div>
+

@@ -27,6 +27,11 @@ class Post < ActiveRecord::Base
     def self.find_english_posts
       find_by_sql ["SELECT * FROM posts, forums, users WHERE posts.forum_id = forums.id AND posts.user_id = users.id AND users.language = 'en'"]
     end
+    
+    
+    def self.find_recent
+      find(:all, :limit => 10, :order => "created_at DESC")
+    end
   
   def to_xml(options = {})
     options[:except] ||= []

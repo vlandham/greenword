@@ -1,6 +1,7 @@
 <h2>Statistics for: <%= @student.whole_name %></h2>
 
 <h3>Forums</h3>
+<h4>Most Recent Posts</h4>
 <div id="details" >	
 <table>
 	<tr><th>Post</th><th>Words</th><th>Date</th></tr>
@@ -19,7 +20,10 @@
 <br/>
 <p>Total Number of Posts: <%= @posts.size %></p>
 <br/>
-<p>Average Words / Post: <%= total / @posts.size %></p>
-
-
+<p>Average Words / Post: <%= total / @posts.size unless @posts.size ==0 %></p>
+<br/>
+<h4>Posts in last 30 days:</h4>
+<div class="graph">
+	<img src="<%= url_for :controller => "stats", :action=> "student_graph", :id => @student.id %>" style="border:1px solid #aabcca;" />
+</div>
 

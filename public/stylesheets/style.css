@@ -407,6 +407,11 @@ p.submit input:hover {
 	background-color: #fff7c9;
 }
 
+.graph {
+	text-align: center;
+	padding-top: 20px;
+}
+
 /*END Content*/
 
 
