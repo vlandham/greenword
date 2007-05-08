@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
-  acts_as_ferret
+  acts_as_ferret :fields => {
+           :body => {:store => :yes}, 
+           :body_html => {:store => :yes}
+           }
   belongs_to :forum, :counter_cache => true
   belongs_to :user,  :counter_cache => true
   belongs_to :topic, :counter_cache => true
@@ -48,4 +51,31 @@ class Post < ActiveRecord::Base
     end
     forum_type
   end
+  
+  def self.find_storage_by_contents(query, options = {})
+    index = self.ferret_index # Get the index that acts_as_ferret created for us
+    results = []
+
+    # search_each is the core search function from Ferret, which Acts_as_ferret hides
+    total_hits = index.search_each(query, options) do |doc, score| 
+      result = {}
+
+      # Store each field in a hash which we can reference in our views
+      result[:body] = index.highlight(query, doc,
+                      :field => :body, 
+                      :pre_tag => "<strong>", 
+                      :post_tag => "</strong>",
+                      :num_excerpts => 1)
+      result[:body_html] = index.highlight(query, doc,
+                      :field => :body_html, 
+                      :pre_tag => "<strong>", 
+                      :post_tag => "</strong>",
+                      :num_excerpts => 1)
+      result[:score] = score   # We can even put the score in the hash, nice!
+
+      results.push result
+    end
+    return block_given? ? total_hits : [total_hits, results]
+  end
+  
 end

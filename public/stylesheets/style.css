@@ -19,7 +19,7 @@ form, fieldset, img, a {
 body {
 	font-size: 100.01%;
 	font-family: 'Lucida Grande', Geneva, Verdana, Arial, Verdana, Helvetica, sans-serif;
-	color: #888888;
+	color: #666666;
 	background-color: #cdcdcd;
 }
 
@@ -186,11 +186,11 @@ table td a:hover {
 
 #content ul {
 	margin-left: 25px; 
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #content ul li {
-	padding: 15px; 
+	padding: 10px; 
 }
 
 #content ul li a
@@ -410,6 +410,26 @@ p.submit input:hover {
 .graph {
 	text-align: center;
 	padding-top: 20px;
+}
+
+/*Translation Section*/
+table.translation tr th
+{
+	background:#333;
+	color:white;
+	font-size:0.8em;
+	padding:3px 10px;
+	border:1px solid #222;
+}
+table.translation tr td
+{
+	padding:7px;
+	border:1px solid #ddd;
+}
+
+.inplaceeditor-form
+{
+	
 }
 
 /*END Content*/

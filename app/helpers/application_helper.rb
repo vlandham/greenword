@@ -15,7 +15,16 @@ module ApplicationHelper
   end
   
   def avatar_for(user, size=32)
-  image_tag  "fetus.png"
+    options = {}
+    if user.admin == 1
+      options[:class] = "teacher-avatar" 
+    end
+    case(user.language)
+    when 'en'
+      flag("us",options)
+    when 'es'
+      flag("cs",options)
+    end
   end
   
   def admin?

@@ -627,6 +627,11 @@ img.grey { background-color:#ccc; }
 img.darkgrey { background-color:#999; }
 img.green { background-color:#0c0;}
 
+img.teacher-avatar {
+	padding: 2px;
+	border: 1px solid #000000;
+}
+
 .post .author .icon
 {
 	float:right;

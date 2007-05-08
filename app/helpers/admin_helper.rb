@@ -1,11 +1,11 @@
 module AdminHelper
   
   def link_to_gallery
-    link_to icon("images"), :controller => :gallery, :action => :index
+    link_to "Go to Gallery "+icon("images"), :controller => :gallery, :action => :index
   end
   
   def link_to_discussion
-     link_to icon("comments"), :controller => :discussion, :action => :index
+     link_to "Go to Discussion "+icon("comments"), :controller => :discussion, :action => :index
   end
   
   def excerpt_all_words(text, phrase, radius = 100, excerpt_string = "...")

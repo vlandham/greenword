@@ -3,7 +3,6 @@
 <% @forums.each do |forum| %>
 	<h3><%= forum.name %></h3>
 	<p>Total posts:<%= forum.posts.size %></p>
-		<%= forum.count_english_posts %>
 	<br/>
 	<% popular_topics = forum.topics.find_popular(5) %>
 	<h4>Top Topics</h4>

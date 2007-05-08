@@ -8,7 +8,7 @@ class DiscussionController < ApplicationController
 #  before_filter :update_last_seen_at, :only => :show
 
   def index
-    @topics = @forum.topics.find(:all)
+    @topics = @forum.topics.find(:all, :order => "replied_at DESC")
   end
 
   def new

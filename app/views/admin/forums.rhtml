@@ -1,4 +1,4 @@
-<h2>Tests</h2>
+<h2>Forums</h2>
 <ul>
 	<% if @discussion %>
 		<%= render(:partial => "forum", :locals => { :forum => @discussion }) %>
@@ -7,17 +7,24 @@
 			<br/> There is no Discussion forum defined for this semester, add one by clicking this link
 			</li>
 	<% end %>
+</ul>
+<br/>
+<ul>
 	<% if @gallery %>
 		<%= render(:partial => "forum", :locals => { :forum => @gallery }) %>
 	<% else %>
 		<li><%= link_to "Add Photo Forum", :controller => :admin, :action => :new_forum, :forum_type => "pho" %><br/> There is no Gallery defined for this semester, add one by clicking this link</li>
 	<% end %>
 	
+</ul>
+<br/>
+<ul>
+	
 	<li>
 		<%= link_to "Forum Statistics", :controller => :stats, :action => :forums %>
 	</li>
 
 </ul>	
-
+<br/>
 
 <%= link_to_back %>

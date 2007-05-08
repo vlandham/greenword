@@ -1,7 +1,7 @@
 <h2>Translate</h2>
 <div id="language"><%= "Language: %s" / Locale.language.english_name %></div>
 <h3>Empty Translations</h3>
-<table>
+<table class="translation">
     <tr>
 		
 		<th>key</th>
@@ -13,7 +13,7 @@
 			
 			<td><%= tr.tr_key %></td>
 			
-    		<td><span id="tr_<%= tr.id %>">
+    		<td><span id="tr_<%=tr.id %>">
     		<%= render :partial => 'translation_text', :object => tr.text %></span></td>
 		</tr>
     <%= in_place_editor "tr_#{tr.id}", :url => { :action => :set_translation_text, 
