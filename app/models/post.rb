@@ -52,6 +52,10 @@ class Post < ActiveRecord::Base
     forum_type
   end
   
+  def size
+    post = body.split(' ').size
+  end
+  
   def self.find_storage_by_contents(query, options = {})
     index = self.ferret_index # Get the index that acts_as_ferret created for us
     results = []

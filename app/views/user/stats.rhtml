@@ -9,9 +9,9 @@
 	<% @posts.each do |post| %>
 		<tr>
 			<td><%= truncate(post.body_html) %></td>
-			<% size = post.body.split(' ').size %>
-			<td><%= size.to_s %></td>
-			<%- total += size  -%>
+			
+			<td><%= post.size %></td>
+			<%- total += post.size  -%>
 			<td><%= time_ago_in_words(post.created_at) %></td>
 		</tr>
 	<% end %>
@@ -27,3 +27,8 @@
 	<img src="<%= url_for :controller => "stats", :action=> "student_graph", :id => @student.id %>" style="border:1px solid #aabcca;" />
 </div>
 
+<br/>
+
+<div id="export">
+	<%= link_to "Export to CSV", :controller => :reports, :action => :student_forum_report, :id => @student.id %>
+</div>

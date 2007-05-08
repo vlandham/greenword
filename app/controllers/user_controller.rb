@@ -25,6 +25,8 @@ class UserController < ApplicationController
    @gallery_posts = Post.find_gallery_posts(@student.id)
   end
   
+  
+  
   def stats
      @student = @semester.users.find(params[:id])
      @posts = @student.posts.find_recent

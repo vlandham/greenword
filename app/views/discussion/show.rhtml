@@ -156,3 +156,7 @@
   
   <%= link_to h(@topic.forum.name), :action => :index %> 
 </div>
+<br/>
+<div id="export">
+<%= link_to "Export to CSV", :controller => :reports, :action => :topic_report, :id => @topic.id %>	
+</div>

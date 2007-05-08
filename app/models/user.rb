@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
   def self.find_students
     find(:all, :conditions =>["admin = ?", false])
   end
+  
 
   # Encrypts some data with the salt.
   def self.encrypt(password, salt)
