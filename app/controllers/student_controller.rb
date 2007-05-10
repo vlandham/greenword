@@ -53,6 +53,7 @@ class StudentController < ApplicationController
       if !word_answers[index].valid?
         all_ok = false
       end
+    
     end
     
     # Set up the next_word to be displayed  
@@ -69,6 +70,8 @@ class StudentController < ApplicationController
         flash[:notice] = "Error: Answer cannot be blank"
          @next_word = current_word 
     end
+    
+      redirect_to :controller => "student", :action => "word" unless request.xhr?
   end
   
   def completion
@@ -113,6 +116,7 @@ class StudentController < ApplicationController
           flash[:notice] = "Error: Answer cannot be blank"
            @next_completion = current_completion 
       end
+      redirect_to :controller => "student", :action => "completion" unless request.xhr?
   end
   
   def scenario

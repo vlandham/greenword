@@ -183,7 +183,8 @@ a.utility
 {
 
 	font-weight: normal;
-/*	padding-left: 1em;*/
+
+	padding-left: 1em;
 	font-weight:normal;
 	color:#c00;
 	border: none;
@@ -197,6 +198,10 @@ a.utility:hover
 }
 a.subtle { color:#369; }
 a.subtle:hover { color:blue; }
+
+p.reply {
+	margin-top: 25px;
+}
 
 div.asset
 {
@@ -536,7 +541,7 @@ table.posts tr.spacer td
 .post .author .posts
 {
 	display:block;
-	font-size:0.75em;
+	font-size:0.8em;
 	color:black;
 	color:#666;
 }
@@ -557,7 +562,7 @@ table.posts tr.spacer td
 
 .post .date
 {
-	font-size:0.75em;
+	font-size:0.8em;
 	color:#666;
 	font-weight:normal;
 	margin-bottom:0.5em;
@@ -566,8 +571,9 @@ table.posts tr.spacer td
 .posts .post .body
 {
 	border-top:2px solid #eee;
-	font-size:0.9em;
+	font-size:0.85em;
 	padding:10px 20px;
+	color: #222222;
 }
 
 .posts .post .body blockquote

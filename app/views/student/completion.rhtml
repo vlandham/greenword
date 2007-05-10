@@ -1,19 +1,27 @@
-<h2><%=h @current_test.name %></h2>
+<h2><%="Completion Test".t %></h2>
 <div id="inner-content">
 <%= form_remote_tag  :url => {:action => "next_completion" }, 
 					 :html => { :id => 'test_form'} %>
+<div id="left-side">
+	
+	<p><%= "The Question:".t %></p>
 	<div id="completion">
 		 <%= render :partial => "completion", 
 					:locals => { :completion => @last_completion } %>
 	</div>
+</div>
+<div id="right-side">
+	<p><%= "Your Answer:".t %></p>
 	<div class="answer">
 	  
 	   <%= text_area_tag "answer", nil %>
 
 	</div>
+
 	<br />
 
 	<%= submit_tag "next completion" %>
-<%= end_form_tag %>
 
+<%= end_form_tag %>
+</div>
 </div>

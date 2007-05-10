@@ -13,9 +13,14 @@ else
 # page.visual_effect :drop_out, 'word'
 
 page.select("div#notice").each { |div| div.show}
+
+# page.visual_effect :blind_up, 'word', {:queue => 'front'}
+
 page.replace_html 'word', :partial => "word", 
                           :locals => { :word => @next_word }
-page.visual_effect :shake, 'word'
+# page.visual_effect :blind_down, 'word', {:queue => 'end'}
+# page.visual_effect :highlight, 'word', {:queue => 'end'}
+page.visual_effect :highlight, 'word'
 page.call 'Form.reset', 'test_form'
 # page.replace_html 'counter', "<h3>#{@next_word_counter+1} of #{@set_size}</h3>"
  

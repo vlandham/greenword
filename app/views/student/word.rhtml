@@ -1,25 +1,32 @@
-<h2><%=h @current_test.name %></h2>
+<h2><%=h "Word Test".t %></h2>
 <div id="inner-content">
 <%= form_remote_tag  :url => {:action => "next_word" }, 
 					 :html => { :id => 'test_form'} %>
-	<div id="word">
-		 <%= render :partial => "word", 
-					:locals => { :word => @last_word } %>
+	<div id="left-side">
+		<p><%= "The Word:".t %></p>
+		<div id="word">
+			<%= render :partial => "word", 
+						:locals => { :word => @last_word } %>
+		</div>
+		 
 	</div>
 
 		
+	<div id="right-side">
+		<p><%= "Your Responses:".t %></p>
+		<%- counter = 1 -%>
+		<% @answers.each_with_index do |@answer, index| %>
+			<div class="answer">
+				
+				<% fields_for "answer[]" do |f| %>
+					<div class="answer-field"><%= f.text_field :value %></div>
+				<% end %>
 
-	 <% for @answer in @answers %>
-	<div class="answer">
-	  
-	   <% fields_for "answer[]" do |f| %>
-	     <p><%= f.text_field :value %></p>
-	   <% end %>
-
+			</div>
+			<%- counter = counter+1 -%>
+		<% end %>
+		
+		<%= submit_tag "next word" %>
+		<%= end_form_tag %>
 	</div>
-	<br />
-	<% end %>
-	<%= submit_tag "next word" %>
-<%= end_form_tag %>
-
 </div>

@@ -1,17 +1,24 @@
 <h2><%=h @current_test.name %></h2>
 <div id="inner-content">
-<% form_for :answer, @answer, :url => {:action => "save_scenario"} do |f| %>
-<div id="scenario">
-	<%= @scenario.value %>
-</div>
-	<div id="answer">
-		<%= f.text_area :value %>
-		<%= hidden_field_tag :question_id, @scenario.id %>
+
+<div id="top-side">
+	<p><%= "The Question:".t %></p>
+	<div id="scenario">
+		<%= @scenario.value %>
 	</div>
+</div>
+<div id="bottom-side">
 	
-	<%= submit_tag "submit scenario" %>
-<% end %>
+	<p><%= "Your Answer:" %></p>
+	<% form_for :answer, @answer, :url => {:action => "save_scenario"} do |f| %>
+		<div class="answer">
+			<%= f.text_area :value, "cols" => 50, "rows" => 5 %>
+			<%= hidden_field_tag :question_id, @scenario.id %>
+		</div>
+	
+		<%= submit_tag "submit scenario" %>
+	<% end %>
 
-
+</div>
 
 </div>

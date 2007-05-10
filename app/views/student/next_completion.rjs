@@ -15,7 +15,7 @@ if @next_completion.nil?
   page.select("div#notice").each { |div| div.show}
   page.replace_html 'completion', :partial => "completion", 
                             :locals => { :completion => @next_completion }
-  page.visual_effect :shake, 'completion'
+  page.visual_effect :highlight, 'completion'
   page.call 'Form.reset', 'test_form'
   # page.replace_html 'counter', "<h3>#{@next_word_counter+1} of #{@set_size}</h3>"
  
