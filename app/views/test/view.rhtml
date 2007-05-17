@@ -1,0 +1,46 @@
+<h2><%= "Viewing: ".t+@test.name %></h2>
+
+<h3>Words:</h3>
+<ul>
+<% unless @test.words.nil? %>
+<% @test.words.each do |word| %>
+	<li>
+		<%=h word.value %>
+	</li>
+<% end %>
+<% end %>
+</ul>
+<br/>
+<p>
+	<%= link_to "Edit Words".t, :action => :words, :id => @test  %>
+</p>
+
+<h3>Completions:</h3>
+<ul>
+	<% unless @test.completions.nil? %>
+	<% @test.completions.each do |completion| %>
+	<li>
+		<%=h completion.value %>
+	</li>
+	<% end %>
+	<% end %>
+</ul>
+<br/>
+<p><%= link_to "Edit Completions".t, :action => :completions, :id => @test %></p>
+
+<h3>Scenario:</h3>
+<p>
+	<% unless @test.scenario.nil? %>
+	<%=h @test.scenario.value %>
+	<% end %>
+</p>
+<br/>
+<p>
+	<%= link_to "Edit Scenario".t, :action => :scenario, :id => @test %>
+</p>
+
+<br/>
+<br/>
+<p>
+	<%= link_to "Back", :action => :index %>
+</p>

@@ -1,5 +1,7 @@
 <%= error_messages_for "semester" %>
 
+<h2>Edit Semester Details</h2>
+
 <% form_for :semester, :url => { :action => :update, :id => @semester.id} do |f| %>
 	<%= render :partial => "form", :object => f %>
 		<p class="submit"><%= submit_tag 'Update' %></p>

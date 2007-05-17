@@ -1,5 +1,5 @@
 <%= error_messages_for :word if @word %>
-<h2>Words for <%=h @test.name %></h2>
+<h2>Words for '<%=h @test.name %>'</h2>
 
 <ul id="sortable">
 	<% @words.each do |word| %>
@@ -17,8 +17,6 @@
  					  :url => {:action => "word_sort", :id => @test },
 					  :complete => visual_effect(:highlight, 'sortable')
 %>
-
-
 <% form_for :word, :url => { :action => "word_create" } do |f| -%>
 <fieldset>
 <ul class="form">
@@ -31,3 +29,13 @@
 </ul>
 </fieldset>
 <% end -%>
+
+	<div class="clearall">
+		
+	</div>
+<p>
+	<%= link_to "Done".t, :action => :view, :id => @test %>
+</p>
+
+
+

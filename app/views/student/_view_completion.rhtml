@@ -1,13 +1,16 @@
 <div id="answer-set">
 	<h4>Question:</h4>
 	<p id="scenario-<%= completion.id -%>"><%= completion.value %></p>
-	
+<% unless completion.completion_answers.empty? %>
 	<% completion.completion_answers.each_with_index do |answer,i| %>
 	<div class="word-answer <%= cycle("even", "odd") -%>">
 		<%= answer.value %>
 	</div>
 	
 	<% end %>
+<% else %>
+	<p>No Responses Yet</p>
+<% end %>
 	
 </div>
 

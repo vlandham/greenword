@@ -15,6 +15,7 @@ class StudentController < ApplicationController
 
   def word
     @words = @current_test.words
+    
   # should be the next item after the last question answered  
   # if there is no last question answered, then it will be the first question
     last_answered = @current_user.last_word
@@ -76,6 +77,7 @@ class StudentController < ApplicationController
   
   def completion
     @completions = @current_test.completions
+    redirect_to :action => :index and return if @completions.empty?
   # should be the next item after the last question answered  
   # if there is no last question answered, then it will be the first question
     last_answered = @current_user.last_completion
@@ -121,6 +123,7 @@ class StudentController < ApplicationController
   
   def scenario
     @scenario = @current_test.scenario
+    redirect_to :action => :index and return if @scenario.nil?
     last_answered = @current_user.last_scenario
     if !last_answered.nil?
       flash[:notice] = "You have already taken this test"

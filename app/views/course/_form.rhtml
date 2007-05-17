@@ -1,21 +1,16 @@
-<% form_for :course do |f| -%>
-<fieldset>
-<ul class="form">
+
 <li>
 	<label for="name">Name</label>
-	<%= f.text_field :name %>
+	<%= form.text_field :name %>
 </li><br/>
 <li>
 	<label for="number">Course Number</label>
-	<%= f.text_field :number %>
-</li><br/>
+	<%= form.text_field :number %>
+</li><br/><br/>
 <li>
 	<label for="section">Section</label>
-	<%= f.select( "section_id", @semester.sections.find(:all).collect {|c| [c.name, c.id] }) %>
+	<%= form.select( "section_id", @semester.sections.find(:all).collect {|c| [c.name, c.id] }) %>
 </li><br/>
 
 
-<p class="submit"><%= submit_tag 'Create' %></p>
-</ul>
-</fieldset>
-<% end -%>
+

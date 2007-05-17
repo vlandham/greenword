@@ -1,5 +1,11 @@
 <%= error_messages_for :course %>
 
 <h2>Editing Course</h2>
-
-<%= render :partial => "form" %>
+<fieldset>
+<ul class="form">
+<% form_for :course do |f| -%>
+<%= render :partial => "form", :object => f %>
+<p class="submit"><%= submit_tag 'Edit' %></p>
+</ul>
+</fieldset>
+<% end -%>

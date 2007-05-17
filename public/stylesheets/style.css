@@ -246,8 +246,13 @@ label {
 
 input, select { 
 	display:block;
-	width:150px;
+	width:200px;
 	float:left;
+}
+
+input.checkbox {
+	width: 15px;
+	margin-left: 230px;
 }
 /*Sortable list */
 ul#sortable {
@@ -420,7 +425,20 @@ p.submit input:hover {
 
 #scenario {
 	margin-top: 20px;
+}
 
+/*For the compare in test controller*/
+.left-column {
+	float: left;
+	width: 250px;
+	border-right: 1px solid #222222;
+}
+
+
+.right-column {
+	float: left;
+	padding-left: 20px;
+	width: 240px;
 }
 
 /*Student Result Section*/
@@ -526,6 +544,10 @@ table.translation tr td
 #current-semester a {
 	
 	color: #ffffff;
+}
+
+.side-section {
+	float: right;
 }
 
 /*END Content*/

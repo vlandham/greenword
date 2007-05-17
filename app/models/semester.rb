@@ -1,7 +1,7 @@
 class Semester < ActiveRecord::Base
   has_many :test_sets
   has_many :sections
-  has_many :courses, :through => :sections
+  has_many :courses
   has_many :users
   has_many :forums
   
@@ -40,11 +40,12 @@ class Semester < ActiveRecord::Base
           # save all (there should be only one) situations to new set
           old_scenario = set.scenario
           # old_scenario.each do |scenario|
+          if(old_scenario)
             new_scenario = Scenario.new(old_scenario.attributes)
             new_scenario.test_set_id = new_set.id
             new_scenario.show = 0
             new_scenario.save!
-          # end
+          end
           
         end
       end

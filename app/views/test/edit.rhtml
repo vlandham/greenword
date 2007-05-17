@@ -1,6 +1,14 @@
 <h2>Editing Test: <%=h @test.name %></h2>
+
+<h3><%= "Edit Contents".t %></h3>
 <ul>
-<li><%= link_to "Edit/Add Words", :controller => "test", :action => "words", :id => @test  %></li>
-<li><%= link_to "Edit/Add Completions", :controller => "test", :action => "completions", :id => @test  %></li>
-<li><%= link_to "Edit Scenario", :controller => "test", :action => "scenario", :id => @test  %></li>
+<li><%= link_to "Edit/Add Words".t, :controller => "test", :action => "words", :id => @test  %></li>
+<li><%= link_to "Edit/Add Completions".t, :controller => "test", :action => "completions", :id => @test  %></li>
+<li><%= link_to "Edit Scenario".t, :controller => "test", :action => "scenario", :id => @test  %></li>
+</ul>
+<h3><%= "View Current Test".t %></h3>
+<ul>
+	<li>
+		<%= link_to "View Test".t, :controller => :test, :action => :view, :id => @test %>
+	</li>
 </ul>

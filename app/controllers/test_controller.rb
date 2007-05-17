@@ -12,6 +12,16 @@ class TestController < ApplicationController
     @test = @semester.test_sets.find(params[:id])
   end
   
+  def view
+    redirect_to :action => :index and return unless params[:id]
+    @test = @semester.test_sets.find(params[:id])
+  end
+  
+  def compare
+    @english = @semester.test_sets.find_english
+    @spanish = @semester.test_sets.find_spanish
+  end
+  
   def new
       @language = params[:lang]
       @test_set = TestSet.new(params[:test_set])
@@ -47,6 +57,7 @@ class TestController < ApplicationController
     # end
     @test = @semester.test_sets.find(params[:id])   
     @words = @test.words.find(:all)
+    
   end
   
   def word_sort
@@ -63,7 +74,7 @@ class TestController < ApplicationController
     test_id = @word.test_set_id
     return unless request.post?
     @word.save!     
-    flash[:notice] = "New Word created"
+    # flash[:notice] = "New Word created"
     redirect_to(:controller => 'test', :action => 'words', :id => test_id)
   rescue ActiveRecord::RecordInvalid
     flash[:notice] = "Error in Section Creation"
@@ -137,13 +148,13 @@ class TestController < ApplicationController
     if request.post?  
       if @scenario.update_attributes(params[:scenario])
         flash[:notice] = "Scenario Has been Updated"
-        redirect_to :controller => 'test', :action => 'edit', :id => test_id
+        redirect_to :controller => 'test', :action => 'view', :id => test_id
       end
     end
   end
   
   def scenario_create(test_id)
-    scenario = Scenario.new {|sc| sc.value = "Edit Me", sc.test_set_id = test_id}
+    scenario = Scenario.new(:value => "edit", :show => 0, :test_set_id => test_id, :visible => 0  )
     scenario.save
     redirect_to :action => "scenario", :id => test_id and return
   end

@@ -1,9 +1,13 @@
 <div id="answer-set">
 	<p id ="scenario-<%= scenario.id %>"><%=h truncate(scenario.value, 50) %> </p>
+	<% unless scenario.scenario_answers.empty? %>
 	<ul>
 		<% scenario.scenario_answers.each do |answer| %>
 			<li><%= answer.value %></li>
 		<% end %>
 	</ul>
+	<% else %>
+		<p>No Responses Yet</p>
+	<% end %>
 
 </div>

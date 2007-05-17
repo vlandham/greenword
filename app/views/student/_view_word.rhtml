@@ -1,11 +1,14 @@
 <div id="answer-set">
-<h4 id="word-<%= word.id -%>"><%= word.value %></h4>
+<h5 id="word-<%= word.id -%>"><%= word.value %></h5>
 
-
+<% unless word.word_answers.empty? %>
 	<% word.word_answers.each_with_index do |answer,i| %>
 	<div class="word-answer <%= cycle("even", "odd") -%>">
 		<%= answer.value %>
 	</div>
 	
 	<% end %>
+<% else %>
+<p>No Responses Yet</p>
+<% end %>
 </div>

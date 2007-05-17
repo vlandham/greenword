@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 36) do
+ActiveRecord::Schema.define(:version => 37) do
 
   create_table "answers", :force => true do |t|
     t.column "user_id",     :integer
@@ -21,9 +21,10 @@ ActiveRecord::Schema.define(:version => 36) do
   end
 
   create_table "courses", :force => true do |t|
-    t.column "section_id", :integer
-    t.column "name",       :string
-    t.column "number",     :string
+    t.column "section_id",  :integer
+    t.column "name",        :string
+    t.column "number",      :string
+    t.column "semester_id", :integer
   end
 
   create_table "forums", :force => true do |t|
@@ -49,7 +50,7 @@ ActiveRecord::Schema.define(:version => 36) do
     t.column "number_grouping_scheme", :string
   end
 
-  add_index "globalize_countries", ["code"], :name => "globalize_countries_code_index"
+  add_index "globalize_countries", ["code"], :name => "index_globalize_countries_on_code"
 
   create_table "globalize_languages", :force => true do |t|
     t.column "iso_639_1",             :string,  :limit => 2
@@ -68,10 +69,10 @@ ActiveRecord::Schema.define(:version => 36) do
     t.column "scope",                 :string,  :limit => 1
   end
 
-  add_index "globalize_languages", ["iso_639_1"], :name => "globalize_languages_iso_639_1_index"
-  add_index "globalize_languages", ["iso_639_2"], :name => "globalize_languages_iso_639_2_index"
-  add_index "globalize_languages", ["iso_639_3"], :name => "globalize_languages_iso_639_3_index"
-  add_index "globalize_languages", ["rfc_3066"], :name => "globalize_languages_rfc_3066_index"
+  add_index "globalize_languages", ["iso_639_1"], :name => "index_globalize_languages_on_iso_639_1"
+  add_index "globalize_languages", ["iso_639_2"], :name => "index_globalize_languages_on_iso_639_2"
+  add_index "globalize_languages", ["iso_639_3"], :name => "index_globalize_languages_on_iso_639_3"
+  add_index "globalize_languages", ["rfc_3066"], :name => "index_globalize_languages_on_rfc_3066"
 
   create_table "globalize_translations", :force => true do |t|
     t.column "type",                :string
@@ -86,7 +87,7 @@ ActiveRecord::Schema.define(:version => 36) do
     t.column "namespace",           :string
   end
 
-  add_index "globalize_translations", ["tr_key", "language_id"], :name => "globalize_translations_tr_key_index"
+  add_index "globalize_translations", ["tr_key", "language_id"], :name => "index_globalize_translations_on_tr_key_and_language_id"
   add_index "globalize_translations", ["table_name", "item_id", "language_id"], :name => "globalize_translations_table_name_and_item_and_language"
 
   create_table "images", :force => true do |t|

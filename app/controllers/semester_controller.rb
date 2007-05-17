@@ -35,8 +35,7 @@ class SemesterController < ApplicationController
          flash[:notice] = "#{@semester.name} updated"
          redirect_to :action => :index
        else
-         flash[:notice] = "Problem with updated fields"
-         redirect_to :action => :edit, :id => @semester.id
+         render :action => :edit, :id => @semester.id
        end
      end
    end
@@ -46,12 +45,20 @@ class SemesterController < ApplicationController
    if(request.post?)
      old_semester = Semester.find(params[:id])
      if(old_semester)
+       copy_classes_box = params[:copy_classes]
+       # puts "Copy classes box: "+copy_classes_box
        new_semester = Semester.new(params[:semester])
        new_semester.freeze = 0
        if(new_semester.save)
          old_semester.duplicate_test_sets(new_semester.id)
          flash[:notice] = "Semester #{old_semester.name} Duplicated, new semester created"
          Settings.current_semester = new_semester.id
+         create_new_forums(new_semester.id)
+         # if the checkbox is checked, copy old classes
+         if(copy_classes_box == "1")
+           
+           copy_classes( old_semester.id,new_semester.id)
+         end
          redirect_to :action => :index
        else
          flash[:notice] = "Problem with attributes of new semeseter"
@@ -63,5 +70,42 @@ class SemesterController < ApplicationController
      end
   end
  end
+ 
+ protected
+ 
+ def copy_classes(old_semester_id,current_semester_id)
+   @semester = Semester.find(old_semester_id)
+   if(@semester)
+     courses = @semester.courses
+     # puts "Number of courses: "+courses.size.to_s
+     courses.each do |course|
+       new_course = Course.new(course.attributes)
+       new_course.semester_id = current_semester_id
+       new_course.save
+     end
+   end
+ end
+ 
+ def create_new_forums(current_semester_id)
+   @semester = Semester.find(current_semester_id)
+   if(@semester)
+   # create discussion forum  
+     if @semester.forums.find_discussion.nil?
+       @discussion_forum = Forum.new( :name => "Discussion", 
+              :description => "This is the Discussion Fourm", :semester_id => current_semester_id,
+              :forum_type => 'dis')
+       @discussion_forum.save
+     end   
+     #create gallery forum
+     if @semester.forums.find_photo.nil?
+       @gallery_forum = Forum.new( :name => "Gallery", 
+               :description => "This is the Gallery Fourm", :semester_id => current_semester_id,
+               :forum_type => 'pho')
+        @gallery_forum.save
+     end  
+   end
+ end
+  
+  
   
 end

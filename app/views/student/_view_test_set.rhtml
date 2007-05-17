@@ -1,24 +1,31 @@
 <h3><%=h test_set.name if test_set%></h3>
 <h4>Words</h4>
 
-<% visible_words = test_set.words.find_visible  %>
-<% visible_words.each do |word| %>
-	<%= render(:partial => "view_word", :locals => {:word => word}) %>
+<% visible_words = test_set.words.find_visible unless test_set.words.empty? %>
+<% if !visible_words.empty? %>
+	<% visible_words.each do |word| %>
+		<%= render(:partial => "view_word", :locals => {:word => word}) %>
+	<% end %>
+<% else %>
+	<p>No Words Yet</p>
 <% end %>
 
 <br/>
 
 <h4>Situations</h4>
 <% visible_completions = test_set.completions.find_visible  %>
-
-<% visible_completions.each do |completion| %>
-	<%= render(:partial => "view_completion", :locals => {:completion => completion}) %>
+<% if !visible_completions.empty? %>
+	<% visible_completions.each do |completion| %>
+		<%= render(:partial => "view_completion", :locals => {:completion => completion}) %>
+	<% end %>
+<% else %>
+	<p>No Situations Yet</p>
 <% end %>
 
 <br/>
 <h4>Scenario</h4>
 
-<% if test_set.scenario.visible? %>
+<% if test_set.scenario && test_set.scenario.visible? %>
 		<%= render(:partial => "view_scenario", :locals => {:scenario => test_set.scenario}) %>
 <% else %>
 	<p>No Scenario as of yet</p>

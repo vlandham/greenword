@@ -1,0 +1,49 @@
+<div id="inner-content">
+	<h3>Words</h3>
+	<div class="left-column">
+		<ul>
+			<%= render :partial => "list", :collection => @english.words %>
+		</ul>
+	</div>
+	<div class="right-column">
+		<ul>
+			<%= render :partial => "list", :collection => @spanish.words %>
+		</ul>
+	</div>
+	<div class="clearall">
+		
+	</div>
+	<h3>Completions</h3>
+	<div class="left-column">
+		<ul>
+			<%= render :partial => "list", :collection => @english.completions %>
+		</ul>
+	</div>
+	<div class="right-column">
+		<ul>
+			<%= render :partial => "list", :collection => @spanish.completions %>
+		</ul>
+	</div>
+	<div class="clearall">
+		
+	</div>
+	<h3>Situations</h3>
+	<div class="left-column">
+		<ul>
+			<%= render :partial => "list", :object => @english.scenario %>
+		</ul>
+	</div>
+	<div class="right-column">
+		<ul>
+			<%= render :partial => "list", :object => @spanish.scenario %>
+		</ul>
+	</div>
+	<div class="clearall">
+		
+	</div>
+	
+</div>
+
+<p>
+	<%= link_to "Back", :action => :index %>
+</p>

@@ -11,6 +11,7 @@ class CourseController < ApplicationController
   
   def new
      @course = Course.new(params[:course])
+     @course.semester_id = @semester.id
      return unless request.post?
      @course.save!     
      redirect_to(:controller => 'course', :action => 'index')
