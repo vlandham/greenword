@@ -13,7 +13,7 @@ class TestController < ApplicationController
   end
   
   def new
-      @language = params[:language]
+      @language = params[:lang]
       @test_set = TestSet.new(params[:test_set])
       @test_set.semester_id = @semester.id
       return unless request.post?

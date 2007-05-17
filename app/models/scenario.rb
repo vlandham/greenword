@@ -1,5 +1,5 @@
 class Scenario < ActiveRecord::Base
-  belongs_to :test
+  belongs_to :test_set
   has_many :scenario_answers, :foreign_key => :question_id
   
   def self.find_visible

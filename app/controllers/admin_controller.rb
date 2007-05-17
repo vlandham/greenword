@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   before_filter :set_semester
   
   def index
+    @cur_semester = @semester
   end
 
   def translate

@@ -10,7 +10,7 @@
 	<% if @spanish %>
 		<%= render(:partial => "test", :locals => { :test => @spanish }) %>
 	<% else %>
-		<li><%= link_to "Add Spanish Test", :controller => :test, :action => "new", :language => "es" %><br/> There is no Spanish Test defined for this semester, add one by clicking this link</li>
+		<li><%= link_to "Add Spanish Test", :controller => :test, :action => "new", :lang => "es" %><br/> There is no Spanish Test defined for this semester, add one by clicking this link</li>
 	<% end %>
 
 </ul>

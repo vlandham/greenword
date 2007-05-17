@@ -2,7 +2,7 @@
 module ApplicationHelper
  
   
-  def icon(icon, options={})
+  def icon(icon, options={:class => "icon"})
      image_tag "icons/#{icon}.png", options
   end
   

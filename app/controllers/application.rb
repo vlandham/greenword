@@ -6,7 +6,15 @@ class ApplicationController < ActionController::Base
     after_filter :set_page
   
  def set_semester
-   @semester = Semester.find(:first)
+   
+   @semester
+   unless(Settings.current_semester.nil?)
+     @semester = Semester.find(Settings.current_semester) 
+   else
+      @semester =  Semester.find(:first)
+   end
+   @semester
+
  end
  
  def set_locale

@@ -1,0 +1,6 @@
+<%= error_messages_for :semester %>
+<% form_for :semester, :url => { :action => :duplicate, :id => @old_semester.id} do |f| %>
+	<%= render :partial => "form", :object => f %>
+
+	<p class="submit"><%= submit_tag 'Create' %></p>
+<% end %>

@@ -24,8 +24,8 @@ body {
 }
 
 a {
-	border-bottom: 1px dotted #545454; 
-	text-decoration: none;
+/*	border-bottom: 1px dotted #545454; */
+	text-decoration: underline;
 	color: #545454;
 }
 
@@ -150,6 +150,7 @@ a:visited {
 		
 }
 
+
 table {
 	padding: 10px;	
 }
@@ -203,10 +204,10 @@ table td a:hover {
 
 #content ul li a:hover
 {
-	font-weight: normal;
-	font-size: 1.4em;
-	color: #ffffff;
-	background-color: #545454;
+/*	font-weight: normal;*/
+/*	font-size: 1.4em;*/
+	color: #006600;
+/*	background-color: #eeeeee;*/
 	text-decoration: none;
 	border: none;
 }
@@ -459,6 +460,11 @@ p.submit input:hover {
 	padding-top: 20px;
 }
 
+div.clearall {
+	clear: both;
+	height: 10px;
+}
+
 /*Translation Section*/
 table.translation tr th
 {
@@ -477,6 +483,49 @@ table.translation tr td
 .inplaceeditor-form
 {
 	
+}
+
+.semester {
+	float: left;
+	text-align: center;
+	
+	margin: 10px;
+	background-color: #dddddd;
+	color: #000000;
+}
+
+.semester a {
+	display:block;
+	text-decoration: none;
+	width: 150px;
+	height: 130px;
+	padding-top: 10px;
+	color: #000000;
+	
+}
+
+.semester a:hover {
+	width: 148px;
+	height: 128px;
+	border-top: 2px solid #222222;
+	border-left: 1px solid #222222;
+	border-right: 1px solid #222222;
+}
+
+.semester p {
+	
+	margin-top: 10px;
+	font-size: 12px;
+	text-align: center;
+}
+
+#current-semester {
+	background-color: #666666;
+	color: #ffffff;
+}
+#current-semester a {
+	
+	color: #ffffff;
 }
 
 /*END Content*/

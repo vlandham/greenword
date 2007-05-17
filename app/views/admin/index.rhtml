@@ -1,4 +1,5 @@
 <h2><%= "Welcome" %> | <% Locale.set("es-CR") %><%= "Welcome".t%></h2>
+<p>Current Semester: <%= link_to @cur_semester.name, :controller => :semester, :action => :index %></p>
 <h3>Options</h3>
 <ul>
 	<li>

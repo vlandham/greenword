@@ -5,6 +5,13 @@ class Semester < ActiveRecord::Base
   has_many :users
   has_many :forums
   
+  
+  validates_presence_of :name, :url
+  validates_uniqueness_of :url
+  validates_length_of :url, :maximum => 8, :message => "Please use a url less than %d"
+  
+  
+  #big nasty function that will copy the test_set over from a previous semester
   def duplicate_test_sets(new_semester_id)
     unless new_semester_id.nil?
       test_sets = self.test_sets.find(:all)
@@ -31,13 +38,13 @@ class Semester < ActiveRecord::Base
           end
           
           # save all (there should be only one) situations to new set
-          old_scenario = set.scenarios.find(:all)
-          old_scenario.each do |scenario|
-            new_scenario = Scenario.new(scenario.attributes)
+          old_scenario = set.scenario
+          # old_scenario.each do |scenario|
+            new_scenario = Scenario.new(old_scenario.attributes)
             new_scenario.test_set_id = new_set.id
             new_scenario.show = 0
             new_scenario.save!
-          end
+          # end
           
         end
       end

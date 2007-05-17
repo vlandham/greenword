@@ -1,0 +1,17 @@
+<h2><%= "Details for: ".t %><%=h @student.whole_name %></h2>
+<h4><%= "First Name: ".t %></h4>	
+<p><%=h @student.first_name %></p>
+<h4><%= "Last Name: ".t %></h4>
+<p><%=h @student.last_name %></p>
+<h4><%= "Login / Email :".t %></h4>
+<p><%=h @student.email %></p>
+<h4><%= "Language".t %></h4>
+<% if @student.language == 'en' %>
+	<p>English</p>
+<% else %>
+	<p>Spanish</p>
+<% end %>
+<h4><%= "Course: ".t %></h4>
+<p><%= @student.course.name %></p>
+
+<%= link_to_back %>

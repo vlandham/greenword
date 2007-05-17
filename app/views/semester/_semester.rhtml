@@ -1,0 +1,5 @@
+<div class="semester"<%= "id=\"current-semester\"" if semester.id == Settings.current_semester.to_i %>>
+	<%= link_to semester.name, :action => :set_current_semester, :id => semester.id %>
+	<p><%= semester.created_on -%></p>
+</div>
+

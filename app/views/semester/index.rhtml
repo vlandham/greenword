@@ -1,6 +1,15 @@
+<h2>Semesters</h2>
+<p>Click on the <%= icon("add") %> to create a new semester with the tests from that old semester</p>
 <ul>
 <% @semesters.each do |semester| %>
-	<li><%=h semester.name %></li>
+	<li><%= link_to semester.name, :action => :edit, :id => semester.id %> <%= link_to icon("add"), :action => :new, :id => semester.id %></li>
+
 	
 <% end %>
 </ul>
+
+<br/>
+
+<p><%= "Current Semester is: ".t %><%= @semester.name %></p>
+<br/>
+<p><%= link_to "Change Current Semester".t, :action => :view %></p>
