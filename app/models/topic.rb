@@ -1,6 +1,7 @@
 class Topic < ActiveRecord::Base
   belongs_to :forum, :counter_cache => true
   belongs_to :user
+  belongs_to :section
   has_one :image, :dependent => :destroy
   # has_many :monitorships
   # has_many :monitors, :through => :monitorships, :conditions => ['monitorships.active = ?', true], :source => :user, :order => 'users.login'
@@ -18,6 +19,7 @@ class Topic < ActiveRecord::Base
   before_save   :check_for_changing_forums
 
   attr_accessible :title
+  attr_accessible :subtitle
   # to help with the create form
   attr_accessor :body
 
@@ -48,10 +50,10 @@ class Topic < ActiveRecord::Base
 
   def views() hits end
 
-  def paged?() posts_count > 25 end
+  def paged?() posts_count > 15 end
   
   def last_page
-    (posts_count.to_f / 25.0).ceil.to_i
+    (posts_count.to_f / 15.0).ceil.to_i
   end
 
   def editable_by?(user)
@@ -69,6 +71,10 @@ class Topic < ActiveRecord::Base
       controller = "gallery"
     end
     controller
+  end
+  
+  def before_validation
+    return false if self.forum.semester.locked?
   end
   
   protected

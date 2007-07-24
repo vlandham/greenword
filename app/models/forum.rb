@@ -1,3 +1,6 @@
+# Top level of Discussion & Gallery.  
+#
+# Largely copied over from Beast.
 class Forum < ActiveRecord::Base
   acts_as_list
   belongs_to :semester
@@ -33,13 +36,18 @@ class Forum < ActiveRecord::Base
       @last_post ||= find(:first, :include => :user)
     end
   end
-  
+
+# Returns the discussion forum ( used like @semester.find_discussion)  
   def self.find_discussion
      find(:first, :conditions => ["forum_type = ?", "dis"]) 
   end
-  
+# Returns the gallery forum ( used like @semester.find_discussion)  
   def self.find_photo
     find(:first, :conditions => ["forum_type = ?", "pho"])
+  end
+  
+  def before_validation
+    return false if self.semester.locked?
   end
   
 # this doesn't work  

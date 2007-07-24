@@ -1,0 +1,31 @@
+<h2><%= "Library".t %></h2>
+
+<h3><%= "Documents".t %></h3>
+<div class="documents">
+	<% @documents.each do |document| %>
+		<div class="document">
+			<h4><%= link_to document.title, document.public_filename %></h4>
+			<div class="date">
+				<%= time_ago_in_words(document.created_on) %>
+			</div>
+			<p><%= document.instructions %></p>
+			
+		</div>
+	<% end %>
+</div>
+
+<h3><%= "Links".t %></h3>
+<div class="documents">
+	<% @links.each do |link| %>
+		<div class="document">
+			<h4><%= link_to link.title, link.url %></h4>
+			<div class="date">
+				<%= time_ago_in_words(link.created_on) %>
+			</div>
+			<p><%= link.note %></p>
+			
+		</div>
+	<% end %>
+</div>
+
+<p><%= link_to "back", :action => :index %></p>

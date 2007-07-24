@@ -1,0 +1,31 @@
+<h3>Edit Announcement</h3>
+
+<% form_for :announcement, @announcement, :url => {:action => :update, :id => @announcement} do |f| %>
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title  %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Announcement</b><br/>
+		<%= f.text_area :value %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Show on Students Front Page</b><br/>
+		<%= f.check_box :front_page %>
+	</p>
+	<br/>
+	<br/>
+	<%= submit_tag "Update" %>
+<% end %>
+
+<br/>
+<p><%=  link_to "Delete Announcement", {:action => :destroy, :id => @announcement}, 
+		{ :confirm => "Are you sure you want to remove this announcement permanently?", :method => "post"} %></p>
+		
+<br />
+
+<p><%= link_to "back", :action => :index %></p>

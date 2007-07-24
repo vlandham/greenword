@@ -1,11 +1,11 @@
-<h2>Sections for <%=h @semester.name %></h2>
-<h3>Current Sections</h3>
+<h2>Groups for <%=h @semester.name %></h2>
+<h3><%= "Current Groups".t %></h3>
 <ul>
 <% @sections.each do |section| %>
 	<li><%= link_to section.name, :action => 'edit', :id => section.id %></li>
 <% end %>
 </ul>
-<h3>Options</h3>
+<h3><%= "Options".t %></h3>
 <ul>
-<li><%= link_to "New Section", :action => :new %></li>
+<li><%= link_to "New Group".t, :action => :new %></li>
 </ul>

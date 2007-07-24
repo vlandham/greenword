@@ -1,0 +1,14 @@
+<%= error_messages_for :semester %>
+<% form_for :semester, :url => { :action => :duplicate, :id => @old_semester.id } do |f| %>
+	<%= render :partial => "form", :object => f %>
+	<br/>
+	<p>Copy Classes over as well?</p>
+	<%= check_box_tag :copy_classes, 1, true, :class => "checkbox" %>
+
+	<p class="submit"><%= submit_tag 'Create' %></p>
+<% end %>
+<br/>
+<br/>
+<p>
+	This will duplicate the tests for the previous semester: <strong><%= @old_semester.name %></strong>
+</p>

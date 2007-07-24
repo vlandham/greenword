@@ -1,12 +1,31 @@
-<h2>Courses for <%=h @semester.name %></h2>
-<h3>Current Courses</h3>
-<ul>
-<% @courses.each do |course| %>
-	<li><%= link_to course.name, :action => 'edit', :id => course.id %></li>
-<% end %>
-</ul>
+<h2>Classes for <%=h @semester.name %></h2>
+<div class="left-column">
+	
+
+<h3>Classes</h3>
+<div id="courses">
+	<%= render :partial => "courses", :object => @courses %>
+</div>
+
+</div>
+
+<div class="right-column">
+	<h3>Groups</h3>
+	<% @sections.each do |section| %>
+		<div id="section-<%= section.id %>" class="section">
+			<div class="section-number"><%= section.position %></div>
+			<%= section.name %>
+		</div>
+		<%= drop_receiving_element("section-"+section.id.to_s, 
+		:url =>  { :controller => "course", :action => "add_to_section", :section_id => section.id },
+		:hoverclass => "section-active") %>
+	<% end %>
+</div>
+<div class="clearall">
+	
+</div>
 <h3>Options</h3>
 <ul>
-<li><%= link_to "New Course", :action => :new %></li>
-<li><%= link_to "Group by Section", :action => :by_section %></li>
+<li><%= link_to "New Class", :action => :new %></li>
+<li><%= link_to "Edit Classes", :action => :by_section %></li>
 </ul>

@@ -1,0 +1,36 @@
+<%= error_messages_for :scenario if @scenario %>
+<h2>Words for <%=h @test.name %></h2>
+
+<ul id="sortable">
+	<% @scenarios.each do |scenario| %>
+		<li id="scenario_<%= scenario.id %>" class="scenario-list">
+			<%=h scenario.value %> <%= link_to icon("cancel"), {:controller => "test", 
+								   :action => "scenario_delete",
+								   :id => scenario.id },
+								 	{ :method => :post,
+									  :confirm => "Really delete this scenario?"}%>
+		</li>
+	<% end %>
+</ul>
+
+<%= sortable_element 'sortable',
+ 					  :url => {:action => "scenario_sort", :id => @test },
+					  :complete => visual_effect(:highlight, 'sortable')
+%>
+
+
+<% form_for :scenario, :url => { :action => "scenario_create" } do |f| -%>
+
+<ul class="form">
+<li>
+	<label for="value"><%= "Add scenario:".t %></label>
+	<%= f.text_area :value, :cols => 55, :rows => 6 %>
+	<%= f.hidden_field :test_set_id, :value => @test.id %>
+</li><br/>
+<p class="submit"><%= submit_tag 'Create' %></p>
+</ul>
+<% end -%>
+
+<p>
+	<%= link_to "Done".t, :action => :view, :id => @test %>
+</p>

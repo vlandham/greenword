@@ -29,15 +29,26 @@
 <p><%= link_to "Edit Completions".t, :action => :completions, :id => @test %></p>
 
 <h3>Scenario:</h3>
-<p>
-	<% unless @test.scenario.nil? %>
-	<%=h @test.scenario.value %>
+<ul>
+	<% unless @test.scenarios.nil? %>
+		<% @test.scenarios.each do |scenario| %>
+		<li>
+			<%=h scenario.value %>
+		</li>
+		<% end %>
 	<% end %>
-</p>
+</ul>
 <br/>
 <p>
-	<%= link_to "Edit Scenario".t, :action => :scenario, :id => @test %>
+	<%= link_to "Edit Scenarios".t, :action => :scenarios, :id => @test %>
 </p>
+<span class="right-side">
+<%= link_to icon("cancel"), {:controller => "test", 
+					   :action => "destroy",
+					   :id => @test.id },
+					 	{ :method => :post,
+						  :confirm => "Really delete #{@test.name} This will remove all words, completions and scenarios associated with this test"}%>
+</span>
 
 <br/>
 <br/>

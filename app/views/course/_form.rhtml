@@ -2,15 +2,13 @@
 <li>
 	<label for="name">Name</label>
 	<%= form.text_field :name %>
-</li><br/>
+</li><br/><br/>
 <li>
 	<label for="number">Course Number</label>
 	<%= form.text_field :number %>
-</li><br/><br/>
-<li>
-	<label for="section">Section</label>
-	<%= form.select( "section_id", @semester.sections.find(:all).collect {|c| [c.name, c.id] }) %>
-</li><br/>
+</li>
+	<br/><br/><br/>
+
 
 
 

@@ -12,7 +12,15 @@ if @next_completion.nil?
    flash[:notice]  = "Completion Test Completed.  Thank you!"
    page.redirect_to :action => 'index'
  else
-  page.select("div#notice").each { |div| div.show}
+   
+   if @notice
+     page["error-section"].replace_html @notice
+   else
+     page["error-section"].replace_html " "
+   end
+   
+   
+  # page.select("div#notice").each { |div| div.show}
   page.replace_html 'completion', :partial => "completion", 
                             :locals => { :completion => @next_completion }
   page.visual_effect :highlight, 'completion'

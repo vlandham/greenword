@@ -1,4 +1,5 @@
 <h2><%=h "Word Test".t %></h2>
+<div id="error-section"></div>
 <div id="inner-content">
 <%= form_remote_tag  :url => {:action => "next_word" }, 
 					 :html => { :id => 'test_form'} %>
@@ -19,7 +20,7 @@
 			<div class="answer">
 				
 				<% fields_for "answer[]" do |f| %>
-					<div class="answer-field"><%= f.text_field :value %></div>
+					<div class="answer-field"><%= f.text_field :value, :id => "answer-field-#{index}" %></div>
 				<% end %>
 
 			</div>

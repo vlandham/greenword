@@ -4,9 +4,9 @@
 <table class="translation">
     <tr>
 		
-		<th>key</th>
+		<th>Original</th>
 		
-		<th>translation</th>
+		<th>Translation</th>
 	</tr>
     <% @view_translations.each do |tr| %>
     	<tr>
@@ -24,7 +24,13 @@
 
 </table>
 <h3>All Translations</h3>
-<table>
+<table class="translation">
+	<tr>
+
+		<th>Original</th>
+
+		<th>Translation</th>
+	</tr>
 	<% @all_translations.each do |tr| %>
 	<tr>
 		

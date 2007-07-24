@@ -1,10 +1,4 @@
-<div id="over-image">
-	
+<%= link_to_close_redbox(image_tag @topic.image.public_filename) %>
 
-<%= image_tag @topic.image.public_filename %>
-
-
-
-</div>
-
-<%= link_to_close_redbox("Close") %>
+<!-- This is what was on the show page before:
+		 <%= link_to_remote_redbox image_tag(@topic.image.public_filename(:medium)), :url => {:controller => 'gallery', :action => 'show_image', :id => @topic.id} %> -->

@@ -2,21 +2,36 @@
 <p>
 <label for="topic_title"><%= "Title".t %></label><br />
 <%= form.text_field :title, :onchange => "/*TopicForm.editNewTitle(this);*/", :class => "primary", :tabindex => 10 %>
-
-
-
+</p>
+<br/>
+<br/>
+<p>
+<label for="topic_subtitle"><%= "Instructions".t %></label><br />
+<%= form.text_field :subtitle, :class => "primary", :tabindex => 20 %>
+<br/>
+<br/>
 <%= form.check_box :sticky %> <%= "Sticky".t %>
+<br/>
+<br/>
+<%= form.check_box :locked %> <%= "Locked".t %>
 	
-
-
-
-
 </p>
 <% if @topic.new_record? %>
+
 <p>
 <br/>
 <label for="topic_body"><%= "Body".t %></label><br />
-<%= form.text_area :body, :rows => 12, :tabindex => 20 %></p>
+<%= form.text_area :body, :rows => 12, :tabindex => 30 %>
+</p>
+<br/>
+<p>
+	<label for="section">Section</label>
+	<% sections = [["All", "-1"]] %>
+	<% sections.concat @semester.sections.find(:all).collect {|c| [c.name, c.id] } %>
+	<%= form.select( "section_id", sections) %>
+</p><br/>
+<br/>
+
 <% end %>
 
 

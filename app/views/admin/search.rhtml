@@ -1,9 +1,19 @@
-<h2>Search</h2>
+<h2>Search Posts</h2>
 
-<h3>Search Posts</h3>
+<%= form_tag :action => :results %>
+<fieldset>
+<ul class="form">
+<li>
+	<label for="search">Search For:</label> 
+</li>
+<br/>
+<li>
+	<%= text_field_tag :query, nil, {:size => 30} %>
+</li>
 
-<% form_for :search, :url => {:action => :results } do |f| %>
-<p>Search For: </p><%= f.text_field :search %>
-<%= submit_tag "Search" %>
 
-<% end %>
+<p class="submit"><%= submit_tag 'Search' %></p>
+
+</fieldset>
+</ul>
+<%= end_form_tag %>

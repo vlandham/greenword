@@ -1,0 +1,34 @@
+<h2>Library</h2>
+<h3>Documents</h3>
+<div class="documents">
+	<% @documents.each do |doc| %>
+	<div class="document">
+		<h4><%= link_to doc.title, doc.public_filename %></h4>
+		<div class="date">
+			<%= time_ago_in_words(doc.created_on) %>
+		</div>
+		<p><%= doc.instructions %></p>
+		<p><%= link_to "Edit", :action => :edit, :id => doc %></p>
+	</div>
+	<% end %>
+</div>
+<br />
+
+<h3>Links</h3>
+<div class="documents">
+	<% @links.each do |link| %>
+	<div class="document">
+		<h4><%= link_to link.title, link.url %></h4>
+		<div class="date">
+			<%= time_ago_in_words(link.created_on) %>
+		</div>
+		<p><%= link.note %></p>
+		<p><%= link_to "Edit", :action => :edit_link, :id => link %></p>
+	</div>
+	<% end %>
+</div>
+<br />
+
+<p><%= link_to("New document", :action => :new) if @current_user.admin? %></p>
+<br/>
+<p><%= link_to("New link", :action => :new_link) if @current_user.admin? %></p>

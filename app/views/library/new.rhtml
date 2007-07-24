@@ -1,0 +1,29 @@
+<%= error_messages_for :document %>
+
+<% form_for(:document, :url => {:action => :create}, 
+                      :html => { :multipart => true }) do |f| -%>
+  
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title %>
+	</p>
+	<br/>
+	<br/>
+	
+	<p>
+		<b>Instructions</b><br/>
+		<%= f.text_area :instructions %>
+	</p>
+	<br/>
+	<br/>
+		
+	<p>
+		<b>Add Document</b><br/>
+		<%= f.file_field :uploaded_data %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<%= submit_tag 'Create' %>
+	</p>
+<% end -%>

@@ -11,11 +11,13 @@
 <% form_for :topic,
      :url  => {:action => "create"}, :html => { :multipart => true } do |f| -%>
 <%= render :partial => "form", :object => f %>
-<label for="image">Upload An Image:</label>
+<br/>
+<p>
+<label for="image">Image:</label>
 <%= f.file_field :uploaded_data %>
 </p>
-<br/>
-<%= submit_tag "Post Topic".t, :or => link_to("cancel".t, :controller => :gallery, :action => :index) %>
+<br/><br/>
+<p><%= submit_tag "Post Topic".t, :or => link_to("cancel".t, :controller => :gallery, :action => :index) %></p>
 <% end -%>
 
 

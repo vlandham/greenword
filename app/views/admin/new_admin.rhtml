@@ -1,0 +1,40 @@
+<%= error_messages_for :user %>
+<h2><%= "Add New Administrator".t %></h2>
+
+<% form_for :user do |f| -%>
+<fieldset>
+<ul class="form">
+<li>
+	<label for="user_first_name">First Name</label>
+	<%= f.text_field :first_name, {:size => 20} %>
+</li><br/>
+<li>
+	<label for="user_last_name">Last Name</label>
+	<%= f.text_field :last_name, {:size => 20} %>
+</li><br/>
+<li>
+	<label for="user_login">Email</label>
+	<%= f.text_field :login, {:size => 20} %>
+</li><br/>
+
+<li>
+	<label for="user_password">Password</label>
+	<%= f.password_field :password, {:size => 20} %>
+</li><br/>
+
+<li>
+	<label for="password_confirmation">Confirm Password</label>
+	<%= f.password_field :password_confirmation, {:size => 20} %>
+</li><br/><br/>
+
+<li>
+	<label for="user_language">Language</label>
+	<%= f.select :language, User::LANGUAGES, :prompt => "Select language" %>
+</li><br/>
+
+
+
+<p class="submit"><%= submit_tag 'Sign up' %></p>
+</ul>
+</fieldset>
+<% end -%>

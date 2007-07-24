@@ -1,0 +1,29 @@
+# if @next_scenario.last?
+  #Adds a new entry in the test completed table that indicates a student has
+  # completed a test
+    # completion = TestComplete.new(:user_id => session['user'].id,
+                                  # :word_set_id => @word_set.id)
+    # completion.save
+    # flash[:notice]  = "Completion Test Completed.  Thank you!"
+    # page.redirect_to :action => 'index'
+# else
+# page.visual_effect :drop_out, 'word'
+if @next_scenario.nil?
+   flash[:notice]  = "Scenario Test Completed.  Thank you!"
+   page.redirect_to :action => 'index'
+ else
+   
+   if @notice
+     page["error-section"].replace_html @notice
+   else
+     page["error-section"].replace_html " "
+   end
+   
+  page.select("div#notice").each { |div| div.show}
+  page.replace_html 'scenario', :partial => "scenario", 
+                            :locals => { :scenario => @next_scenario }
+  page.visual_effect :highlight, 'scenario'
+  page.call 'Form.reset', 'test_form'
+  # page.replace_html 'counter', "<h3>#{@next_word_counter+1} of #{@set_size}</h3>"
+ 
+end

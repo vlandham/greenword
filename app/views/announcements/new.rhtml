@@ -1,0 +1,27 @@
+<h3>New Announcement</h3>
+
+<% form_for :announcement, @announcement, :url => {:action => :create} do |f| %>
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title  %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Announcement</b><br/>
+		<%= f.text_area :value %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Show on Students Front Page</b><br/>
+		<%= f.check_box :front_page %>
+	</p>
+	<br/>
+	<br/>
+	<%= submit_tag "Create" %>
+<% end %>
+
+<br />
+
+<p><%= link_to "back", :action => :index %></p>

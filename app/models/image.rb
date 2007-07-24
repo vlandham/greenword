@@ -1,3 +1,6 @@
+# Simple class to manage images used in the Gallery.
+#
+# attr_writers are a hack to facilitate attachment_fu to work properly.
 class Image < ActiveRecord::Base
   belongs_to :forum
   belongs_to :user
@@ -11,7 +14,7 @@ class Image < ActiveRecord::Base
                    :storage => :file_system, 
                    :max_size => 1000.kilobytes,
                    :resize_to => '800x600>',
-                   :thumbnails => { :thumb => '100x75>', :medium => '500x375>' }
+                   :thumbnails => { :thumb => '100x100>', :medium => '500x375>' }
 
     validates_as_attachment
 end

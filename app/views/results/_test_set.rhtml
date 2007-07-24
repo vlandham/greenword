@@ -15,10 +15,13 @@
 </table>
 
 <h4>Scenario</h4>
-<% if test_set.scenario %>
-	<p>
-		<%= render(:partial => "scenario", :locals => {:scenario => test_set.scenario}) %>
-	</p>
+<% if test_set.scenarios %>
+	<table>
+	<% test_set.scenarios.each do |scenario| %>
+
+		<%= render(:partial => "scenario", :locals => {:scenario => scenario}) %>
+	<% end %>
+	</table>
 <% else %>
 	<p>No Scenario Present</p>
 <% end %>

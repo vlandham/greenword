@@ -1,0 +1,13 @@
+<div id="announcement-<%= announcement.id %>" class="announcement">
+	<h4><%= link_to announcement.title, :action => :edit, :id => announcement %></h4>
+	<div class="date">
+		<%= time_ago_in_words(announcement.created_on) %>
+	</div>
+	<div class="toggle-button">
+		<%= switcher(announcement) %>
+	</div>
+	<p><%= announcement.value %></p>
+	<div class="author">
+		by <%=h announcement.user.whole_name %>
+	</div>
+</div>

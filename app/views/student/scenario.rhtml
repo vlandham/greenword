@@ -1,24 +1,25 @@
-<h2><%=h @current_test.name %></h2>
+<h2><%="Scenario Survey".t %></h2>
+<div id="error-section"></div>
 <div id="inner-content">
-
-<div id="top-side">
-	<p><%= "The Question:".t %></p>
-	<div id="scenario">
-		<%= @scenario.value %>
-	</div>
-</div>
-<div id="bottom-side">
-	
-	<p><%= "Your Answer:" %></p>
-	<% form_for :answer, @answer, :url => {:action => "save_scenario"} do |f| %>
-		<div class="answer">
-			<%= f.text_area :value, "cols" => 50, "rows" => 5 %>
-			<%= hidden_field_tag :question_id, @scenario.id %>
+	<%= form_remote_tag  :url => {:action => "next_scenario" }, 
+						 :html => { :id => 'test_form'} %>
+	<div id="top-side">
+		<p><%= "The Question:".t %></p>
+		<div id="scenario">
+			 <%= render :partial => "scenario", 
+						:locals => { :scenario => @last_scenario } %>
 		</div>
-	
-		<%= submit_tag "submit scenario" %>
-	<% end %>
+	</div>
+	<div id="bottom-side">
+		<p><%= "Your Answer:".t %></p>
+		<div class="answer">	  
+		   <%= text_area_tag :value, nil, "cols" => 50, "rows" => 5 %>
+		</div>
 
-</div>
+		<br />
 
+		<%= submit_tag "next scenario".t %>
+
+	<%= end_form_tag %>
+	</div>
 </div>

@@ -1,0 +1,5 @@
+<div id="course-<%= course.id %>" class="course">
+	<span class="course-name"><%= course.name %></span>
+	<span class="course-number"><%= course.section ? course.section.position : 'x' %></span>
+</div>
+<%= draggable_element("course-"+course.id.to_s, :revert => true) %>

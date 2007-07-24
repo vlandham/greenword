@@ -1,4 +1,5 @@
 <div id="inner-content">
+	<h2 class="center">English | Spanish</h2>
 	<h3>Words</h3>
 	<div class="left-column">
 		<ul>
@@ -30,12 +31,12 @@
 	<h3>Situations</h3>
 	<div class="left-column">
 		<ul>
-			<%= render :partial => "list", :object => @english.scenario %>
+			<%= render :partial => "list", :collection => @english.scenarios %>
 		</ul>
 	</div>
 	<div class="right-column">
 		<ul>
-			<%= render :partial => "list", :object => @spanish.scenario %>
+			<%= render :partial => "list", :collection => @spanish.scenarios %>
 		</ul>
 	</div>
 	<div class="clearall">

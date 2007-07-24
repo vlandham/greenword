@@ -1,8 +1,16 @@
-<table>
+<h2>Results:</h2>
+
+<table class="results">
+	<th>Post</th>
+	<th>User</th>
+	<th></th>
 <% @results.each do |result| %>
 <tr>
 	<td>
-		<%= highlight_all_words(result.body_html, @search_term)%>
+		<%= highlight_all_words(result.body_html, @query)%>
+	</td>
+	<td>
+		<%= result.user.whole_name %>
 	</td>
 	<td>
 		<%= link_to "Go to Topic", :controller => result.forum_controller, :action => :show,
@@ -14,5 +22,12 @@
 </table>
 
 <br/>
-
+<p>
+<%= link_to 'Previous page', { :page => @pages.current.previous, :query => @query} if @pages.current.previous %>
+<%= pagination_links(@pages, :params => { :query=> @query }, :class_name => 'page') %>
+<%= link_to 'Next page', { :page => @pages.current.next, :query => @query} if @pages.current.next %>
+</p>
+<br/>
+<p>
 <%= link_to "Back to Search", :action => :search %>
+</p>

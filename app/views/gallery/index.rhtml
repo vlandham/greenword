@@ -5,6 +5,7 @@
 	<%= link_to image_tag(topic.image.public_filename(:thumb)), 
 				:action => "show", :controller => "gallery", :id => topic.id %>
 	<p><%= link_to topic.title, :action => "show", :controller => "gallery", :id => topic.id %></p>
+	<p><%= topic.section.name %></p>
 
 </div>
 
@@ -16,5 +17,7 @@
 </div>
 
 <% if admin? %>
+<p>
 <%= link_to "new image".t, :action => "new" %>	
+</p>
 <% end %>

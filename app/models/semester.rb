@@ -1,9 +1,12 @@
 class Semester < ActiveRecord::Base
   has_many :test_sets
-  has_many :sections
+  has_many :sections, :order => :position
   has_many :courses
   has_many :users
   has_many :forums
+  has_many :announcements, :order => "updated_on DESC"
+  has_many :documents
+  has_many :links
   
   
   validates_presence_of :name, :url
@@ -38,10 +41,10 @@ class Semester < ActiveRecord::Base
           end
           
           # save all (there should be only one) situations to new set
-          old_scenario = set.scenario
+          old_scenarios = set.scenarios
           # old_scenario.each do |scenario|
-          if(old_scenario)
-            new_scenario = Scenario.new(old_scenario.attributes)
+          old_scenarios.each do |scenario|
+            new_scenario = Scenario.new(scenario.attributes)
             new_scenario.test_set_id = new_set.id
             new_scenario.show = 0
             new_scenario.save!
@@ -52,4 +55,5 @@ class Semester < ActiveRecord::Base
     end
   end
   
+    
 end

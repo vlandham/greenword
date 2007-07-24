@@ -13,5 +13,7 @@
 <% end %>
 <h4><%= "Course: ".t %></h4>
 <p><%= @student.course.name %></p>
-
-<%= link_to_back %>
+<br />
+<p><%= link_to "Edit Details", :action => :edit, :id => @student %></p>
+<br />
+<p><%= link_to "Back", :action => :list %></p>

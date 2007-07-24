@@ -1,14 +1,37 @@
 <h2><%= "Welcome".t+" "+h(@user.whole_name) %></h2>
-<h3><%= "Tests".t %></h3>
+<h2><%= @semester.name %></h2>
+
+<% unless @announcements.nil? %>
+	<h3><%= "Announcements".t %></h3>
+	<div class="announcements">
+		<% @announcements.each do |announcement| %>
+			<div class="announcement">
+				<h4><%=h announcement.title %></h4>
+				<div class="date"><%= time_ago_in_words(announcement.updated_on) %></div>
+				<p><%=h announcement.value %></p>
+				<div class="author">
+					by <%=h announcement.user.whole_name %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<p><%= link_to "All announcements", :action => :announcements %></p>
+<% end %>
+
+<h3><%= "Library".t %></h3>
+<p><%= link_to "Go to Library".t, :action => :library %></p>
+
+<h3><%= "Surveys".t %></h3>
+
 <ul>
 	<li>
-		<%= link_to "Word Test".t, :controller => :student, :action => :word %>
+		<%= link_to_unless @semester.locked?, "Word Survey".t, :controller => :student, :action => :word %>
 	</li>
 	<li>
-		<%= link_to "Completion Test".t, :controller => :student, :action => :completion %>
+		<%= link_to_unless @semester.locked?, "Completion Survey".t, :controller => :student, :action => :completion %>
 	</li>
 	<li>
-		<%= link_to "Scenario Test".t, :controller => :student, :action => :scenario %>
+		<%= link_to_unless @semester.locked?, "Scenario Survey".t, :controller => :student, :action => :scenario %>
 	</li>
 </ul>
 <h3><%= "Forums".t %></h3>

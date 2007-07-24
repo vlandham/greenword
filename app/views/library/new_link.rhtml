@@ -1,0 +1,28 @@
+<%= error_messages_for :link %>
+
+<% form_for(:link, :url => {:action => :create_link}) do |f| -%>
+  
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title %>
+	</p>
+	<br/>
+	<br/>
+	
+	<p>
+		<b>Note</b><br/>
+		<%= f.text_field :note %>
+	</p>
+	<br/>
+	<br/>
+		
+	<p>
+		<b>URL</b><br/>
+		<%= f.text_field :url %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<%= submit_tag 'Create' %>
+	</p>
+<% end -%>

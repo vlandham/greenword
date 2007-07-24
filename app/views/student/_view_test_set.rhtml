@@ -24,9 +24,11 @@
 
 <br/>
 <h4>Scenario</h4>
-
-<% if test_set.scenario && test_set.scenario.visible? %>
-		<%= render(:partial => "view_scenario", :locals => {:scenario => test_set.scenario}) %>
+<% visible_scenarios = test_set.scenarios.find_visible  %>
+<% if !visible_scenarios.empty? %>
+	<% visible_scenarios.each do |scenario| %>
+		<%= render(:partial => "view_scenario", :locals => {:scenario => scenario}) %>
+	<% end %>
 <% else %>
 	<p>No Scenario as of yet</p>
 <% end %>

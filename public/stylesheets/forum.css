@@ -439,6 +439,20 @@ table.topics tr td .flag {
   padding:1px 5px;
   margin-right:0.5em; }
 
+/*Added to deal with the other stuff in the topic section like section name*/
+table.topics tr td .topic-subtitle {
+	margin-left: 5px;
+}
+table.topics tr td .topic-section {
+	font-weight: bold;
+	margin-top: 3px;
+	color: #333333;
+}
+
+/*table.topics tr .odd {
+	background-color: #efefef;
+}
+*/
 /* misc */
 
 .button_or
@@ -491,11 +505,19 @@ div.stats .posts { float:right; text-align:right; }
 
 .crumbs
 {
+	padding-top: 6px;
 	font-size:0.75em;
 	font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
+	background-color: #ffffff;
 }
-.crumbs a { color:#468; }
-.crumbs a:hover { color:#00c; text-decoration:underline; }
+.crumbs a { 
+	color:#006600;
+	text-decoration:none; 
+}
+.crumbs a:hover { 
+	color:#666666; 
+	text-decoration:underline; 
+}
 
 /* posts */
 
@@ -727,8 +749,10 @@ div.editbox ul.help {
 
 div.thumbnail {
 	float: left;
-	padding:10px;
-	margin: 10px;	
+	padding: 10px;
+	margin: 15px;	
+	width: 120px;
+	height: 120px;
 
 }
 
@@ -736,17 +760,23 @@ div.thumbnail {
 
 div.thumbnail a {
 	border: none;
+	text-align: center;
 	
 }
 
-div.thumbnail img {
-
+div.thumbnail a img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+	
+	
 }
 
 div.thumbnail p {
 	text-align: center;
 	padding-top: 5px;
 	font-size: .7em;
+
 }
 
 div.thumbnail:hover {
@@ -756,8 +786,7 @@ div.thumbnail:hover {
 }
 
 #over-image {
-	
-	padding: 20px;
+
 }
 
 

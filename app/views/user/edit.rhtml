@@ -1,79 +1,32 @@
-<h2><%=h @student.whole_name %></h2>
-<!-- <%= @student.last_word || "no last word" %> -->
-<p><%= link_to "Student Statistics", :action => :stats, :id => @student %></p>
-<br/>
-<p><%= link_to "View Details", :action => :view, :id => @student.id %></p>
-<h3>Word Association Responses</h3>
-<p><%= "No Responses Yet".t if @word_hash.empty? %></p>
-<%  @word_hash.each do |word, answers| %>
-<h4><%= word %></h4>
-<table>
- <tr>
-	<% answers.each do |answer| %>
+<h2>Editing Student: <%=h @student.whole_name %></h2>
 
-		<td><%= answer %></td>
-
-	<% end %>
- </tr>
-</table>
-
-<% end %>
-
-
-<h3>Completion Responses</h3>
-<p><%= "No Responses Yet".t if @completion_answers.empty? %></p>
-<table>
-<% @completion_answers.each do |answer| %>
-<% question = answer.completion %>
-<tr>
-
-	<td><%=h question.value %></td>
-	<td><%=h answer.value %></td>
-</tr>
-<% end %>
-</table>
-<h3>Scenario Response</h3>
-<p><%= "No Responses Yet".t if @scenario_answers.empty? %></p>
-<% @scenario_answers.each do |answer| %>
-	<h4>Scenario Question:</h4>
-	<p><%= answer.scenario.value %></p>
-	<h4>Response: </h4>
-	<p><%=h answer.value %></p>
+<% form_for :student, :url => {:action => :update, :id => @student} do |f| %>
+	<fieldset>
+	<ul class="form">
+	<li>
+		<label for="first_name">First Name</label>
+		<%= f.text_field :first_name, {:size => 20} %>
+	</li><br/>
+	<li>
+		<label for="last_name">Last Name</label>
+		<%= f.text_field :last_name, {:size => 25} %>
+	</li><br/>
+	<li>
+		<label for="email">Email</label>
+		<%= f.text_field :email, {:size => 20} %>
+	</li><br/>
 	
+	<li>
+		<label for="user_language">Language</label>
+		<%= f.select :language, User::LANGUAGES, :prompt => "Select language" %>
+	</li><br/>
+
+	<li>
+		<label for="section">Class</label>
+		<%= f.select( "course_id", @semester.courses.find(:all).collect {|c| [c.name, c.id] }) %>
+	</li><br/>
+	<br/>
+	
+	
+	<%= submit_tag "update" %>
 <% end %>
-
-<h3>Discussion Posts</h3>
-<p><%= "No Responses Yet".t if @discussion_posts.empty? %></p>
-<table>
-<% @discussion_posts.each do |post| %>
-	<tr>
-		<td>
-			<%= post.body_html %>
-		</td>
-		<td>
-			<%= link_to post.topic.title, :controller => :discussion, 
-												:action => :show, :id => post.topic_id %>
-		</td>
-	</tr>
-
-<% end %>
-</table>
-
-<h3>Gallery Posts</h3>
-<p><%= "No Responses Yet".t if @gallery_posts.empty? %></p>
-<table>
-
-	<% @gallery_posts.each do |post| %>
-		<tr>
-			<td>
-				<%= post.body_html %>
-			</td>
-			<td>
-				<%= link_to post.topic.title, :controller => :gallery, 
-													:action => :show, :id => post.topic_id %>
-			</td>
-		</tr>
-	<% end %>
-
-
-</table>

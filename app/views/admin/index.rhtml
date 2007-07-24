@@ -1,9 +1,20 @@
 <h2><%= "Welcome" %> | <% Locale.set("es-CR") %><%= "Welcome".t%></h2>
 <p>Current Semester: <%= link_to @cur_semester.name, :controller => :semester, :action => :index %></p>
+<br/>
+
+<p><% if @semester.enrollable? %>
+		<%= icon("user_add") -%> This semester is accepting students. <%= link_to "Disable Enrollment", :action => :toggle_enroll %>
+	<% else %>
+		<%= icon("user_delete") -%> This semester is currently <strong>not</strong> accepting students. <%=link_to "Allow Enrollment ", :action => :toggle_enroll %>
+	<% end %>
+</p>
 <h3>Options</h3>
 <ul>
 	<li>
-		<%= link_to "Edit Students", :controller => 'user', :action => 'index' %>
+		<%= link_to "Edit Library", :controller => 'library', :action => 'index' %>
+	</li>
+	<li>
+		<%= link_to "Edit Announcements", :controller => 'announcements', :action => 'index' %>
 	</li>
 	<li>
 		<%= link_to "Edit Test", :controller => 'test', :action => 'index' %>
@@ -18,5 +29,9 @@
 		<%= link_to "Edit Sections", :controller => 'section', :action => 'index' %>
 		Sections group multiple classes together
 	</li>
+	<li>
+		<%= link_to "Add Administrator", :controller => 'admin', :action => 'new_admin' %>
+	</li>
+	
 	
 </ul>

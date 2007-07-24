@@ -1,6 +1,7 @@
 module AuthenticatedSystem
-  protected
   
+  protected
+  attr  :semester
      def update_last_seen_at
         return unless logged_in?
         User.update_all ['last_seen_at = ?', Time.now.utc], ['id = ?', current_user.id] 
@@ -15,7 +16,7 @@ module AuthenticatedSystem
     
     # Accesses the current user from the session.
     def current_user
-      @current_user ||= (session[:user] && User.find_by_id(session[:user])) || :false
+      @current_user ||= (session[:user] && @semester.users.find_by_id(session[:user])) || :false
     end
     
     # Store the given user in the session.
@@ -46,7 +47,7 @@ module AuthenticatedSystem
     
     def admin_login_required
       username, passwd = get_auth_data
-      self.current_user ||= User.authenticate(username, passwd) || :false if username && passwd
+      self.current_user ||= @semester.users.authenticate(username, passwd) || :false if username && passwd
       logged_in? && authorized? ? true : access_denied
     end
 
@@ -65,10 +66,10 @@ module AuthenticatedSystem
     #   skip_before_filter :login_required
     #
     def login_required
-      username, passwd = get_auth_data
-      self.current_user ||= User.authenticate(username, passwd) || :false if username && passwd
-      logged_in? && admitted? ? true : access_denied
-    end
+       username, passwd = get_auth_data
+       self.current_user ||= @semester.users.authenticate(username, passwd) || :false if username && passwd
+       logged_in? && admitted? ? true : access_denied
+     end
     
     # Redirect as appropriate when an access request fails.
     #

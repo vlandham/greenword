@@ -53,7 +53,7 @@ a:visited {
 /*Header*/
 #header {
 	height: 85px;
-	background:url(/images/tree.gif) no-repeat right top;
+/*	background:url(/images/tree.gif) no-repeat right top;*/
 	border-bottom: 10px solid #1a1a1a;
 }
 
@@ -89,12 +89,13 @@ a:visited {
 /*END Top-Nav*/
 /*END Header*/
 
-/*Nav  -- currently not used*/
+/*Nav */
 #nav {
-	height:35px;
-	line-height:35px;
-	background:url(/images/bg-menu.png) repeat-x;
-	padding:0 10px 20px 0;
+	height: 25px;
+/*	line-height:35px;*/
+/*	background:url(/images/bg-menu.png) repeat-x;*/
+	background-color: #1a1a1a;
+/*	padding:0 10px 20px 0;*/
 }
 
 #nav ul {
@@ -218,7 +219,7 @@ form {
 	padding: 20px;	
 }
 
-form fieldset {
+fieldset {
 	width: 50%;
 	border-top-width: 1px;
 	border-right-width: 1px;
@@ -246,7 +247,7 @@ label {
 
 input, select { 
 	display:block;
-	width:200px;
+/*	width:200px;*/
 	float:left;
 }
 
@@ -254,6 +255,27 @@ input.checkbox {
 	width: 15px;
 	margin-left: 230px;
 }
+
+.inplaceeditor-form {
+	
+}
+
+input.editor-field {
+	
+}
+
+a.editor_cancel {
+	color: #1a1a1a;
+	padding-left: 5px;
+	padding-top: 5px;
+	float: right;
+}
+
+a.editor_cancel:hover {
+	background-color: #ffffff;
+}
+
+
 /*Sortable list */
 ul#sortable {
 	list-style: none;
@@ -348,8 +370,91 @@ p.submit input:hover {
 	border: 1px solid #aaaaaa
 }
 
+/*Announcements Section*/
+.announcements {
+	margin-left: 10px;
+	
+}
+
+.announcements .announcement {
+	color: #454545;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.announcements .announcement h4 {
+	float: left;
+}
+
+.announcements .announcement .date {
+	float: left;
+	font-size: 10px;
+}
+
+.announcements .announcement .author {
+	text-align: right;
+	margin-right: 20px;
+	font-size: 12px;
+}
+
+.announcements .announcement p {
+	clear: both;
+}
+
+.announcements .announcement .toggle-button {
+	float: right;
+	margin-right: 20px;
+}
+
+/*END Announcements*/
+
+/*Documents Section*/
+/*Currently a copy of announcements*/
+.documents {
+	margin-left: 10px;
+	
+}
+
+.documents .document {
+	color: #454545;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.documents .document h4 {
+	float: left;
+}
+
+.documents .document .date {
+	float: left;
+	font-size: 10px;
+}
+
+.documents .document .author {
+	text-align: right;
+	margin-right: 20px;
+	font-size: 12px;
+}
+
+.documents .document p {
+	clear: both;
+}
+
+/*END Documents*/
+
 
 /*Student Test Section*/
+
+#error-section {
+	margin: 0px auto;
+	width: 50%;
+	color: #ffffff;
+	background-color: #666666;
+	text-align:center;
+}
+
 #inner-content {
 	margin: 0px auto;
 	width:	70%;
@@ -427,11 +532,20 @@ p.submit input:hover {
 	margin-top: 20px;
 }
 
+.scenario-list {
+	border-bottom: 1px dotted #1a1a1a;
+	margin-bottom: 15px;
+}
+
 /*For the compare in test controller*/
 .left-column {
 	float: left;
-	width: 250px;
+	width: 270px;
 	border-right: 1px solid #222222;
+}
+
+.left-column ul {
+	list-style-type: none;
 }
 
 
@@ -439,6 +553,15 @@ p.submit input:hover {
 	float: left;
 	padding-left: 20px;
 	width: 240px;
+}
+
+.right-column ul {
+	list-style-type: none;
+}
+
+.right-side {
+	float:right;
+	padding-right:10px;
 }
 
 /*Student Result Section*/
@@ -464,13 +587,17 @@ p.submit input:hover {
 }
 
 .even {
-	background-color: #dddddd;
-	color: #333333;
+	background-color: #eeeeee;
+/*	color: #333333;*/
 }
 
 .highlight {
 	color: #333333;
 	background-color: #fff7c9;
+}
+
+.center {
+	text-align: center;
 }
 
 .graph {
@@ -493,6 +620,20 @@ table.translation tr th
 	border:1px solid #222;
 }
 table.translation tr td
+{
+	padding:7px;
+	border:1px solid #ddd;
+}
+
+table.results tr th
+{
+	background:#333;
+	color:white;
+	font-size:0.8em;
+	padding:3px 10px;
+	border:1px solid #222;
+}
+table.results tr td
 {
 	padding:7px;
 	border:1px solid #ddd;
@@ -550,6 +691,84 @@ table.translation tr td
 	float: right;
 }
 
+#ctrlbutton {
+	margin-left: 10px;
+
+}
+
+#ctrlbutton a {
+	text-decoration: none;
+}
+
+#help {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	color: #1a1a1a;
+	font-size: .85em;
+}
+
+#help p {
+	margin-top: 10px;
+}
+
+/*Courses Start*/
+.course {
+/*	float: left;*/
+/*	text-align: left;*/
+	padding-left: 5px;
+	padding-top: 5px;
+	margin: 10px;
+	background-color: #dddddd;
+	color: #000000;
+	width: 170px;
+	height: 25px;
+	padding-right: 10px;
+/*	height: 100px;*/
+	
+}
+
+.course .course-name {
+/*	display:block;*/
+	text-decoration: none;
+/*	padding-top: 10px;*/
+	color: #000000;
+	text-align: left;
+	float:left;
+}
+
+.course .course-number {
+	text-align: right;
+	color: #c00000;
+	float: right;
+/*	padding-left: 25px;*/
+}
+
+.section {
+	text-align: center;
+	padding-top: 5px;
+	margin: 10px;
+	background-color: #dddddd;
+	color: #000000;
+	width: 130px;
+/*	padding-left: 30px;*/
+	padding-left: 10px;
+	padding-bottom: 15px;
+}
+
+.section-active {
+	color: #ffffff;
+	background-color: #669900;
+}
+
+.section .section-number {
+	text-align: left;
+	color: #c00000;
+}
+
+
+/*END Courses*/
+
 /*END Content*/
 
 
@@ -558,7 +777,7 @@ table.translation tr td
 	padding-top: 20px;
 	height: 20px;
 	text-align: center;
-	border-bottom: 3px solid #1a1a1a;
+	border-bottom: 3px solid #999999;
 }
 
 #footer p {

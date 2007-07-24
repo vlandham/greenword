@@ -6,25 +6,25 @@
 <ul class="form">
 <li>
 	<label for="user_first_name">First Name</label>
-	<%= f.text_field :first_name %>
+	<%= f.text_field :first_name, {:size => 20} %>
 </li><br/>
 <li>
 	<label for="user_last_name">Last Name</label>
-	<%= f.text_field :last_name %>
+	<%= f.text_field :last_name, {:size => 20} %>
 </li><br/>
 <li>
 	<label for="user_login">Email</label>
-	<%= f.text_field :login %>
+	<%= f.text_field :login, {:size => 20} %>
 </li><br/>
 
 <li>
 	<label for="user_password">Password</label>
-	<%= f.password_field :password %>
+	<%= f.password_field :password, {:size => 20} %>
 </li><br/>
 
 <li>
 	<label for="password_confirmation">Confirm Password</label>
-	<%= f.password_field :password_confirmation %>
+	<%= f.password_field :password_confirmation, {:size => 20} %>
 </li><br/><br/>
 
 <li>

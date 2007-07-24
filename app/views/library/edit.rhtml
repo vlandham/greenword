@@ -1,0 +1,25 @@
+<h3>Edit Document</h3>
+
+<% form_for :document, @document, :url => {:action => :update, :id => @document} do |f| %>
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title  %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Instructions</b><br/>
+		<%= f.text_area :instructions %>
+	</p>
+	<br/>
+	<br/>
+	<%= submit_tag "Update" %>
+<% end %>
+
+<br/>
+<p><%=  link_to "Delete document", {:action => :destroy, :id => @document}, 
+		{ :confirm => "Are you sure you want to remove this document permanently?", :method => "post"} %></p>
+		
+<br />
+
+<p><%= link_to "back", :action => :index %></p>

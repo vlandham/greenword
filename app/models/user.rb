@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :scenario_answers
   has_many :images
   has_many :posts
+  has_many :announcements
+  has_many :documents
+  has_many :links
   
   attr_protected :admitted
   attr_protected :admin
@@ -29,7 +32,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..100
   # validates_length_of       :email,    :within => 3..100
-  validates_uniqueness_of   :login, :case_sensitive => false
+  validates_uniqueness_of   :login, :case_sensitive => false, :scope => :semester_id
   validates_presence_of :language
   validates_inclusion_of :language, :in => LANGUAGES.map {|disp,value| value}
   

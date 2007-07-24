@@ -17,4 +17,12 @@
 <label for="topic_body"><%= "Body".t %></label><br />
 <%= form.text_area :body, :rows => 12, :tabindex => 20 %></p>
 <% end %>
+<br/>
+<p>
+	<label for="section">Section</label>
+	<% sections = [["All", "-1"]] %>
+	<% sections.concat @semester.sections.find(:all).collect {|c| [c.name, c.id] } %>
+	<%= form.select( "section_id", sections) %>
+</p><br/>
+<br/>
 

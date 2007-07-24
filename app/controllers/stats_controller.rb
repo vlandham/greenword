@@ -1,16 +1,19 @@
+# Creates graphs for the various reports pages.  
+#
+# Graphs are based on the gruff plugin
 class StatsController < ApplicationController
   require 'gruff'
   before_filter :set_semester
   layout "admin"
   
+# Returns all forums for the semester (Should be just two : Gallery and Discussion)
   def forums
     @forums = @semester.forums
-    
   end
   
+# Returns the graph used in the student report page to display posts for a particular user
   def student_graph
-    
-    student = User.find(params[:id])
+    student = @semester.users.find(params[:id])
     if student
       g = Gruff::Line.new('580x210')
       g.theme = {
@@ -23,7 +26,7 @@ class StatsController < ApplicationController
       g.hide_legend = true
       g.font = File.expand_path('fonts/Vera.ttf', RAILS_ROOT)
     
-      range = "created_at #{(30.days.ago.to_date..Date.today).to_s(:db)}"
+      range = "created_at #{(30.days.ago.to_date...Date.today+1.day).to_s(:db)}"
   
       @posts = student.posts.count(:all, :conditions => range,
                 :group => "DATE_FORMAT(created_at, '%m-%d')", :order =>"created_at ASC")
@@ -42,8 +45,7 @@ class StatsController < ApplicationController
     end
   end
   
-
-  
+# Creates graph used in displaying posts to the particular forums on the forum reports page  
   def forum_stats
       g = Gruff::Line.new('580x210')
       g.theme = {
@@ -56,11 +58,11 @@ class StatsController < ApplicationController
       # g.hide_legend = true
       g.font = File.expand_path('fonts/Vera.ttf', RAILS_ROOT)
       
-      range = "created_at #{(30.days.ago.to_date..Date.today).to_s(:db)}"
-      @posts = Forum.find_discussion.posts.count(:all, :conditions => range,
+      range = "created_at #{(30.days.ago.to_date...Date.today+1.day).to_s(:db)}"
+      @posts = @semester.forums.find_discussion.posts.count(:all, :conditions => range,
               :group => "DATE_FORMAT(created_at, '%m-%d')", :order =>"created_at ASC")
                 
-      @gallery_posts = Forum.find_photo.posts.count(:all, :conditions => range, 
+      @gallery_posts = @semester.forums.find_photo.posts.count(:all, :conditions => range, 
               :group => "DATE_FORMAT(created_at, '%m-%d')", :order =>"created_at ASC")
 
       # Take the union of all keys & convert into a hash {1 => "month", 2 => "month2"...}
@@ -76,9 +78,10 @@ class StatsController < ApplicationController
       # g.x_axis_label = nil
       send_data(g.to_blob, :disposition => 'inline', :type => 'image/png', :filename => "forum-stats.png")
     end
-    
+
+# Currently not used.   
     def language_chart
-      forum = Forum.find(params[:id])
+      forum = @semester.forums.find(params[:id])
       if(forum)
         g = Gruff::Pie.new('580x210')
          g.theme = {
@@ -101,7 +104,8 @@ class StatsController < ApplicationController
       end
        
     end
-    
+
+#   Basic test graph to get the gruff to work    
     def test_graph
       g = Gruff::Line.new
       g.title = "My Graph" 

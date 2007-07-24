@@ -1,5 +1,6 @@
 module ResultsHelper
-  
+
+# creates icon that allows word/situation/scenario to be shown / hidden in the results page of the students
   def switcher(word, type)
     if !word.visible?
       link_to_remote "show "+icon("accept"), :url => {:controller => "results", :action =>"toggle_"+type, 

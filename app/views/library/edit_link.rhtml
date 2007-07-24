@@ -1,0 +1,32 @@
+<h3>Edit Link</h3>
+
+<% form_for :link, @link, :url => {:action => :update_link, :id => @link} do |f| %>
+	<p>
+		<b>Title</b><br/>
+		<%= f.text_field :title  %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>Instructions</b><br/>
+		<%= f.text_field :note %>
+	</p>
+	<br/>
+	<br/>
+	<p>
+		<b>URL</b><br/>
+		<%= f.text_field :url %>
+	</p>
+	<br/>
+	<br/>
+	
+	<%= submit_tag "Update" %>
+<% end %>
+
+<br/>
+<p><%=  link_to "Delete link", {:action => :destroy_link, :id => @link}, 
+		{ :confirm => "Are you sure you want to remove this link permanently?", :method => "post"} %></p>
+		
+<br />
+
+<p><%= link_to "back", :action => :index %></p>

@@ -1,4 +1,23 @@
 <h2>Edit Which Results to Display</h2>
+
+ <div id="ctrlbutton" class="expand">
+   <%= link_to('help '+icon("help"), '#', :onclick => toggler, :id => 'toggler') %>
+ </div>
+ <div id="help" style="display:none">
+	<h4>Results Help</h4>
+   	<p>This section allows you to choose which results are displayed to the student and which are kept hidden
+	</p>
+	<p>
+		To make a word / completion / scenario visible, click the icon to the right of the item which says 'show <%= icon("accept") %>'.  This will make it visible to the students and change this icon to read 'hide <%= icon("cancel") %>'.
+	</p>
+	<p>
+		To prevent an item from being viewed by students, click on this 'hide <%= icon("cancel") %>' icon.
+	</p>
+	<%= link_to('close', '#', :onclick => toggler, :id => 'toggler') %>
+ </div>
+
+
+
 <% if @english %>
 <%= render(:partial => "test_set", :locals => {:test_set => @english}) %>
 <% end %>

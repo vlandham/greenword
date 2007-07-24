@@ -1,17 +1,25 @@
+# Allows for the control of which results (i.e. words and word answers) will be displayed to the students for a semester.
+#
+# Used to limit visibility of results to help direct dialog of students and teachers
 class ResultsController < ApplicationController
   before_filter :set_semester
   before_filter :admin_login_required, :except => [:index]
   layout "admin"
-  
+
+# Redirects to the edit action
   def index
     redirect_to :action => "edit" and return
   end
-  
+
+# Gathers test sets for the semesters english and spanish tests
   def edit
      @english = @semester.test_sets.find_english
      @spanish = @semester.test_sets.find_spanish
   end
   
+# Display method for all three test types : words, completions, and scenarios.  Used to display the answers associated with a specific word/completion/scenario.
+#
+# Uses type parameter in the url to distinguish what the id is associated with
   def show
     type = params[:type]
     @item
@@ -31,10 +39,10 @@ class ResultsController < ApplicationController
     @hash_ans = split_into_hash_of_arrays(@answers) { |ans| ans.user } 
   end
   
-  
+# Method called via Ajax to switch a word from visible on the results page to not visible, or vise-versa.  
   def toggle_word
     return unless request.post?
-    word = Word.find(params[:id])
+    word = @semester.words.find(params[:id])
     if word.visible?
       word.visible = false
     else
@@ -52,10 +60,10 @@ class ResultsController < ApplicationController
     end
   end
   
- 
+# Method called via Ajax to switch a completion from visible on the results page to not visible, or vise-versa.  
   def toggle_completion
     return unless request.post?
-    completion = Completion.find(params[:id])
+    completion = @semester.completions.find(params[:id])
     if completion.visible?
       completion.visible = false
     else
@@ -72,10 +80,11 @@ class ResultsController < ApplicationController
       end
     end
   end
-  
+
+# Method called via Ajax to switch a scenario from visible on the results page to not visible, or vise-versa.   
   def toggle_scenario
     return unless request.post?
-    scenario = Scenario.find(params[:id])
+    scenario = @semester.scenarios.find(params[:id])
     if scenario.visible?
       scenario.visible = false
     else
@@ -92,7 +101,8 @@ class ResultsController < ApplicationController
       end
     end
   end
-  
+
+# helper function I found somewhere. Used in the show method.
   def split_into_hash_of_arrays(arry)
     hash = Hash.new
     for element in arry

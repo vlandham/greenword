@@ -1,0 +1,10 @@
+<h2><%= "Announcements".t %></h2>
+<div class="announcements">
+	<% @announcements.each do |announcement| %>
+		<%= render :partial => "announcement", :object => announcement %>
+	<% end %>
+	
+</div>
+
+<br />
+<p><%= link_to "New Announcement", :action => :new %></p>

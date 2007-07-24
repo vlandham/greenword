@@ -7,12 +7,20 @@
 		<th class="la">by</th>
 	</tr>
 	<% @topics.each do |topic| %>
-		<tr>
+		<tr class="<%= cycle("even", "odd") -%>">
 			<td class="c1">
 				<img class="icon grey" src="/images/clearbits/comment.gif" alt=&quoticon&quot />
 			</td>
 			<td class="c2">
 				<%= link_to topic.title, :action => "show", :controller => "discussion", :id => topic.id %>
+				<div class="topic-subtitle">
+					<%= topic.subtitle if topic.subtitle %>
+				</div>
+				<% if admin? %>
+					<div class="topic-section">
+						<%= topic.section.name %>
+					</div>
+				<% end %>
 			</td>
 			<td>
 				<%= distance_of_time_in_words_to_now(topic.created_at) %>
@@ -28,5 +36,5 @@
 </table>
 
 <% if admin? %>
-<%= link_to "new topic".t, :action => "new" %>	
+<p><%= link_to "new topic".t, :action => "new" unless @semester.locked? %></p>
 <% end %>

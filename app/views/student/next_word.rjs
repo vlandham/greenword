@@ -12,7 +12,12 @@ if @next_word.nil?
 else
 # page.visual_effect :drop_out, 'word'
 
-page.select("div#notice").each { |div| div.show}
+# page.select("div#notice").each { |div| div.show}
+if @notice
+  page["error-section"].replace_html @notice
+else
+  page["error-section"].replace_html " "
+end
 
 # page.visual_effect :blind_up, 'word', {:queue => 'front'}
 
@@ -22,6 +27,7 @@ page.replace_html 'word', :partial => "word",
 # page.visual_effect :highlight, 'word', {:queue => 'end'}
 page.visual_effect :highlight, 'word'
 page.call 'Form.reset', 'test_form'
+page["answer-field-0"].focus
 # page.replace_html 'counter', "<h3>#{@next_word_counter+1} of #{@set_size}</h3>"
  
 end
