@@ -1,2 +1,86 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake appdoc" to generate API documentation for your models and controllers.
+== Welcome to Greenword
+
+Greenword is a web-based application to facilitate discussion about cultural differences.  It uses word association surveys, discussion forums, image discussions, and other tools to allow for cultural comparisons and dialog.  It's design is based off of the MIT Cultura project, however it attempts to address some of Cultura's weaknesses by being easy to administer, use, and analyze. 
+
+Greenword is meant to be used as a supplement to language courses at a university level.  
+
+
+
+
+
+== Basic Usage
+
+Here is what normal interaction with Greenword would look like for students and administrators.
+
+=== Student
+
+Starts by requesting admission to the current Greenword semester. Once admitted by an administrator, the student logs in and Begins taking the surveys for that semester.  There are three surveys: word associations, completion responses, and scenarios.  The surveys and in fact the entire site is displayed in the language that the student selected during the sign-up phase.  
+
+Once the surveys are completed, the student goes to the discussion and gallery forums to make comments on the current discussions for his/her group.  The student responds to questions posed by the administrator as well as other points made by other students.
+
+An announcement appears on the student's home page in Greenword indicating that a some of the survey responses are available to view in the Results section.  The student clicks on the results link and is shown a limited number of answers to the various surveys (Note: only the answers and not the students associated with these answers are displayed to the student).
+
+Another announcement comes, indicating there is an assigned reading and a link to view in the Library.  The student navigates to the library and downloads the corresponding pdf file.  Then goes to the link.  The student returns to the discussion forum where there are new topics from the administrator to discuss these documents.
+
+=== Administrators
+
+First the administrator creates a new semester, which will hold all the surveys, students and forums for a particular time period.  If there have been other semesters created in the past, the administrator will have the option of using one of these earlier semester as a base.  Doing this will cause the surveys, classes and groups to be copied over from the old semester to the new semester.  
+
+The administrator will then create classes that will be used to organize students and groups which will in turn organize these classes and allow the forums to be easily broken up into manageable  sections.  If the new semester was created from an old one, then these classes and groups have already been made for them.
+
+Then the word, completion, and scenario surveys are created.  Again, if this semester was copied from an old one, this work has already been done.  If not, then a new Survey set is made for each language that is being studied (currently only English and Spanish are supported).
+
+Once this set-up is compete, the administrator turns on admission to the semester which allows students to enroll into the Greenword project.  The administrator navigates to the waiting students section and admits the students into the project.  
+
+The administrator goes to the discussion and gallery forums and creates new topics to be discussed by the students.  These discussions are limited by what group a student is in, so that only topics specific to a students group are viewable to the student.  This allows multiple administrators to monitor specific subsections of the discussion and prevents the discussions from becoming too complicated. 
+
+The administrator goes to the library section and adds Word files or pdf files for the students to read.  Also, links to other websites are added here with a description of what the students should do at these sites.
+
+Then the administrator goes to the announcement section and creates an announcement telling the students to read over these documents and then discuss them in the forum.  The administrator goes to the forum and creates a new topic for the different groups for the discussion of these documents.
+
+Once the semester is completed, the administrator locks the semester to prevent further modification.  Then forum discussions, student posts, and other information is downloaded in csv format to be further analyzed in Excel or more sophisticated tool-sets.
+
+== Greenword Organization
+
+Greenword is organized in a hierarchical structure.
+
+=== Basic Organization: 
+
+ Semester
+	Surveys
+		Word surveys
+		Completion surveys
+		Situation surveys
+		
+	Groups
+		Classes
+			Students
+				Answers to:
+					word surveys
+					completion surveys
+					situation surveys
+					
+	Image Gallery Forum
+		Topics 
+			Images
+			Posts
+
+	Discussion Forum
+		Topics
+		Posts
+
+	Library
+		Documents
+		Links
+
+	Announcements
+
+	Administrators
+	
+Sorry this is so confusing.
+
+== Description of Classes
+
+=== Semester
+
+Semesters are the top level of 
