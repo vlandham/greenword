@@ -4,6 +4,72 @@ Greenword is a web-based application to facilitate discussion about cultural dif
 
 Greenword is meant to be used as a supplement to language courses at a university level.  
 
+== Installation
+
+This installation assumes you have ruby, rubygems, and the rake gem already installed.  Also, this program was developed using MySql (v5.0.27).  While Ruby on Rails should be database independent, some of the query syntax used in the models of this application might be different for other dbms's.
+
+This installation deals only with getting Greenword to run in development mode.  For production class deployment of Ruby on Rails applications, look elsewhere.
+
+To install Greenword on your system, first check-out the sourcecode from the greenword repository with something like:
+
+<b>svn checkout http://tools.assembla.com/svn/gw2 greenword</b>
+
+This will download all the source into a folder called 'greenword' in your current directory.  
+
+Move into the greenword folder using:
+
+<b>cd ./greenword </b>
+
+check the database configuration file at <b>./config/database.yml</b>
+
+In this file you will find the database configuration for Greenword.  It will start with something like:
+
+	development:
+	  adapter: mysql
+	  database: greenword_development
+	  username: root
+	  password:
+	  host: localhost
+	  encoding: utf8
+
+Create a database in your directory with the name <b>greenword_development</b> or change this section to refer to the database you would like to use for greenword
+
+When you are certain this setup is properly configured use the command:
+
+<b>rake db:schema:load</b>
+
+This will load the required tables into the development database.
+
+Now you need to create an initial semester and administrator to manage that semester.  Open up the greenword rake tasks file located at <b>./lib/tasks/greenword.rake</b>
+
+In the top portion of this file you will see some initial setup. Something like:
+
+	# Here is the name and url for your first semester.  Change these to what you would like them to be.
+	SEMESTER_NAME = "Fall 07"
+	SEMESTER_URL  = "fall07" 
+
+	# Here is the name and password for your first administrator.  Please at least change the password.
+	# Usernames require the @ as individuals will be using their email accounts as logins.
+	ADMIN_FIRST_NAME  =   "an"
+	ADMIN_LAST_NAME   =   "admin"
+	ADMIN_LOGIN       =   "admin@school.edu"
+	ADMIN_PASSWORD    =   "$t@rBuck$"
+	ADMIN_LANGUAGE    =   "en"    #use es for spanish
+
+This you need to modify to the values you would like for the semester and admin to have.
+
+<b>Note:</b> The admin login requires an email like format. 
+
+When you are satisfied with how your first semester and administrator will be configured, run:
+
+<b>rake greenword:setup</b>
+
+To create an initial database and admin user.
+
+You should now be able to start up the web-server by using:
+<b>./script/server</b>
+from the root of your application and navigate to <b>http://0.0.0.0:3000/</b> and login with your admin user.
+
 
 == Basic Usage
 

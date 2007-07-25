@@ -1,8 +1,8 @@
 namespace :greenword do 
   
   # Here is the name and url for your first semester.  Change these to what you would like them to be.
-  SEMESTER_NAME = "Fall 2007"
-  SEMESTER_URL  = "fall007" 
+  SEMESTER_NAME = "Fall 07"
+  SEMESTER_URL  = "fall07" 
   
   # Here is the name and password for your first administrator.  Please at least change the password.
   # Usernames require the @ as individuals will be using their email accounts as logins.

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: UserController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">UserController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/user_controller_rb.html">
+                app/controllers/user_controller.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ApplicationController.html">
+                ApplicationController
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Controls more administrative access to students. Part of the admin section.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000009">admit</a>&nbsp;&nbsp;
+      <a href="#M000004">answers</a>&nbsp;&nbsp;
+      <a href="#M000005">edit</a>&nbsp;&nbsp;
+      <a href="#M000001">index</a>&nbsp;&nbsp;
+      <a href="#M000003">list</a>&nbsp;&nbsp;
+      <a href="#M000010">split_into_hash_of_arrays</a>&nbsp;&nbsp;
+      <a href="#M000008">stats</a>&nbsp;&nbsp;
+      <a href="#M000006">update</a>&nbsp;&nbsp;
+      <a href="#M000007">view</a>&nbsp;&nbsp;
+      <a href="#M000002">waiting</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="#M000009" class="method-signature">
+          <span class="method-name">admit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets a student to admitted to the Greenword <a
+href="Semester.html">Semester</a>. Used in <a
+href="UserController.html#M000002">waiting</a> <a
+href="UserController.html#M000007">view</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 66</span>
+66:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">admit</span>
+67:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">post?</span>
+68:     <span class="ruby-identifier">student</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+69:     <span class="ruby-identifier">student</span>.<span class="ruby-identifier">admitted</span> = <span class="ruby-keyword kw">true</span>
+70:     <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">student</span>.<span class="ruby-identifier">save</span>)
+71:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:update</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
+72:          <span class="ruby-identifier">page</span>.<span class="ruby-identifier">visual_effect</span> <span class="ruby-identifier">:fade</span>, <span class="ruby-node">&quot;waiting-#{params[:id]}&quot;</span>
+73:       <span class="ruby-keyword kw">end</span>
+74:     <span class="ruby-keyword kw">else</span>
+75:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:update</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
+76:         <span class="ruby-identifier">page</span>.<span class="ruby-identifier">visual_effect</span> <span class="ruby-identifier">:shake</span>, <span class="ruby-value str">'head'</span>
+77:       <span class="ruby-keyword kw">end</span>
+78:     <span class="ruby-keyword kw">end</span>
+79:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">answers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Displays the responses of a particular student for the components of a
+test. Also displays gallery posts and discussion posts.
+</p>
+<p>
+<a href="Link.html">Link</a> is here for the student_all_report
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 26</span>
+26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">answers</span>
+27:    <span class="ruby-ivar">@student</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+28:    <span class="ruby-ivar">@word_answers</span> = <span class="ruby-ivar">@student</span>.<span class="ruby-identifier">word_answers</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+29:    <span class="ruby-ivar">@word_hash</span> = <span class="ruby-identifier">split_into_hash_of_arrays</span>(<span class="ruby-ivar">@word_answers</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">ans</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ans</span>.<span class="ruby-identifier">word</span> } 
+30:    <span class="ruby-ivar">@completion_answers</span> = <span class="ruby-ivar">@student</span>.<span class="ruby-identifier">completion_answers</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+31:    <span class="ruby-ivar">@scenario_answers</span> = <span class="ruby-ivar">@student</span>.<span class="ruby-identifier">scenario_answers</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+32:    <span class="ruby-ivar">@discussion_posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find_discussion_posts</span>(<span class="ruby-ivar">@student</span>.<span class="ruby-identifier">id</span>)
+33:    <span class="ruby-ivar">@gallery_posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find_gallery_posts</span>(<span class="ruby-ivar">@student</span>.<span class="ruby-identifier">id</span>)
+34:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">edit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows editing of attributes for a user
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 37</span>
+37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+38:     <span class="ruby-ivar">@student</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+39:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="#M000001" class="method-signature">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+displays further options
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 8</span>
+ 8:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+ 9:     
+10:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+lists all students
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 18</span>
+18:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">list</span>
+19:     <span class="ruby-ivar">@courses</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">courses</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+20:     <span class="ruby-ivar">@no_class_students</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">'course_id IS NULL'</span>])
+21:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">split_into_hash_of_arrays</span><span class="method-args">(arry) {|element| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Helper function used somewhere.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 82</span>
+82:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">split_into_hash_of_arrays</span>(<span class="ruby-identifier">arry</span>)
+83:     <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+84:     <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">element</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">arry</span>
+85:       <span class="ruby-identifier">expr</span> = <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">element</span>)
+86:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">expr</span>.<span class="ruby-identifier">value</span>
+87:         <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">expr</span>.<span class="ruby-identifier">value</span>] = []
+88:       <span class="ruby-keyword kw">end</span>
+89:       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">expr</span>.<span class="ruby-identifier">value</span>].<span class="ruby-identifier">push</span> <span class="ruby-identifier">element</span>.<span class="ruby-identifier">value</span>
+90:     <span class="ruby-keyword kw">end</span>
+91:     <span class="ruby-identifier">hash</span>
+92:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">stats</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Displays graph and post <a href="UserController.html#M000008">stats</a> for
+a particular student
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 60</span>
+60:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stats</span>
+61:      <span class="ruby-ivar">@student</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+62:      <span class="ruby-ivar">@posts</span> = <span class="ruby-ivar">@student</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">find_recent</span>
+63:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">update</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Performs <a href="UserController.html#M000006">update</a> for the <a
+href="UserController.html#M000005">edit</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+43:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">post?</span>
+44:     <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+45:     <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:student</span>]
+46:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+47:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:view</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>
+48:     <span class="ruby-keyword kw">else</span>
+49:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:edit</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>
+50:     <span class="ruby-keyword kw">end</span>
+51:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">view</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+displays details about the user
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 54</span>
+54:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view</span>
+55:     <span class="ruby-ivar">@student</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+56:     
+57:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">waiting</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+List of those students still <a
+href="UserController.html#M000002">waiting</a> to be accepted into
+Greenword - ordered by course
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/user_controller.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">waiting</span>
+14:     <span class="ruby-ivar">@courses</span> = <span class="ruby-ivar">@semester</span>.<span class="ruby-identifier">courses</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+15:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
