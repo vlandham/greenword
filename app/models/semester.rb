@@ -55,5 +55,29 @@ class Semester < ActiveRecord::Base
     end
   end
   
-    
+  # This is the initial setup for when a new semester is created.
+  #
+  # Currently creates new disscussion and gallery forums.
+  def setup!
+    self.create_new_forums
+  end
+  
+  # Creates new forums witht the correct names for the new semester. This is to make it easier to start up the new semester 
+  def create_new_forums
+  # create discussion forum  
+   if self.forums.find_discussion.nil?
+     @discussion_forum = Forum.new( :name => "Discussion", 
+            :description => "This is the Discussion Fourm", :semester_id => self.id,
+            :forum_type => 'dis')
+     @discussion_forum.save
+   end   
+   #create gallery forum
+   if self.forums.find_photo.nil?
+     @gallery_forum = Forum.new( :name => "Gallery", 
+             :description => "This is the Gallery Fourm", :semester_id => self.id,
+             :forum_type => 'pho')
+      @gallery_forum.save
+   end  
+  end
+
 end

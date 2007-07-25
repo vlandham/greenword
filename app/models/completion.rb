@@ -2,6 +2,7 @@
 # Holds the completion components of a test_set.  
 #
 # Uses acts_as_list to allow re-ordering when editing them
+
 class Completion < ActiveRecord::Base
   belongs_to :test_set
   acts_as_list :scope => :test_set

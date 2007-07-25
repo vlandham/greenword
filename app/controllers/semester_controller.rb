@@ -80,7 +80,7 @@ class SemesterController < ApplicationController
          flash[:notice] = "Semester #{old_semester.name} Duplicated, new semester created"
          Settings.current_semester = new_semester.id
          #creates blank forums-- photo & discussion
-         create_new_forums(new_semester.id)     
+         new_semester.create_new_forums
          # copies current admin user to new semester
          copy_current_user(new_semester.id)
          
@@ -143,26 +143,7 @@ class SemesterController < ApplicationController
    end
  end
 
-# Creates new forums witht the correct names for the new semester. This is to make it easier to start up the new semester 
- def create_new_forums(current_semester_id)
-   @semester = Semester.find(current_semester_id)
-   if(@semester)
-   # create discussion forum  
-     if @semester.forums.find_discussion.nil?
-       @discussion_forum = Forum.new( :name => "Discussion", 
-              :description => "This is the Discussion Fourm", :semester_id => current_semester_id,
-              :forum_type => 'dis')
-       @discussion_forum.save
-     end   
-     #create gallery forum
-     if @semester.forums.find_photo.nil?
-       @gallery_forum = Forum.new( :name => "Gallery", 
-               :description => "This is the Gallery Fourm", :semester_id => current_semester_id,
-               :forum_type => 'pho')
-        @gallery_forum.save
-     end  
-   end
- end
+
  
  # Creates a duplicate of the user making the new semester so that someone can log in.
  #
