@@ -20,6 +20,8 @@ Move into the greenword folder using:
 
 <b>cd ./greenword </b>
 
+
+
 check the database configuration file at <b>./config/database.yml</b>
 
 In this file you will find the database configuration for Greenword.  It will start with something like:
