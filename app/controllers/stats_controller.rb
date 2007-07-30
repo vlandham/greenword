@@ -5,7 +5,7 @@ class StatsController < ApplicationController
   @gruff = true
   begin
     require 'gruff'
-  rescue
+  rescue LoadError
     @gruff = false
   end
   before_filter :set_semester
