@@ -3,12 +3,8 @@
 # Graphs are based on the gruff plugin
 class StatsController < ApplicationController
   @gruff = true
-  begin
-    require 'gruff'
-  rescue LoadError
-    @gruff = false
-  end
   before_filter :set_semester
+  before_filter :load_gruff
   layout "admin"
   
 # Returns all forums for the semester (Should be just two : Gallery and Discussion)
@@ -123,6 +119,15 @@ class StatsController < ApplicationController
       g.labels = {0 => '2003', 2 => '2004', 4 => '2005'}
       send_data(g.to_blob, :disposition => 'inline', :type => 'image/png', :filename => "test.png")
       
+    end
+    
+    def load_gruff
+      @gruff = true
+      begin
+        require 'gruff'
+      rescue LoadError
+        @gruff = false
+      end
     end
   
 end

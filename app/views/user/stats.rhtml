@@ -22,11 +22,12 @@
 <br/>
 <p>Average Words / Post: <%= total / @posts.size unless @posts.size ==0 %></p>
 <br/>
-<h4>Posts in last 30 days:</h4>
-<div class="graph">
-	<img src="<%= url_for :controller => "stats", :action=> "student_graph", :id => @student.id %>" style="border:1px solid #aabcca;" />
-</div>
-
+<% if @gruff %>
+	<h4>Posts in last 30 days:</h4>
+	<div class="graph">
+		<img src="<%= url_for :controller => "stats", :action=> "student_graph", :id => @student.id %>" style="border:1px solid #aabcca;" />
+	</div>
+<% end %>
 <br/>
 
 <div id="export">

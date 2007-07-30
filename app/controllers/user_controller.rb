@@ -3,6 +3,7 @@ class UserController < ApplicationController
   before_filter :admin_login_required
   layout "admin"
   before_filter :set_semester
+  before_filter :load_gruff, :only => [:stats]
 
 # displays further options  
   def index
@@ -90,5 +91,15 @@ class UserController < ApplicationController
     end
     hash
   end
+  
+  def load_gruff
+    @gruff = true
+    begin
+      require 'gruff'
+    rescue LoadError
+      @gruff = false
+    end
+  end
+  
   
 end
