@@ -128,6 +128,7 @@ class StatsController < ApplicationController
       rescue LoadError
         @gruff = false
       end
+      return true
     end
   
 end

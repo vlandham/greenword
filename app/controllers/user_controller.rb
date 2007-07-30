@@ -99,6 +99,7 @@ class UserController < ApplicationController
     rescue LoadError
       @gruff = false
     end
+    return true
   end
   
   
