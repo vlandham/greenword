@@ -43,7 +43,10 @@ namespace :greenword do
         admin.semester_id = first_semester.id
         admin.save!  
         # this creates new gallery and discussion forums for the semester
-        first_semester.setup!      
+        first_semester.setup!  
+        
+        # Set the current_semester settings
+        Settings.current_semester = first_semester.id 
       else
         e = ""
         first_semester.errors.each_full {|error| e.concat(error)}
