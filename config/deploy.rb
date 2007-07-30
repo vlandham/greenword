@@ -24,9 +24,11 @@ set :repository, "http://tools.assembla.com/svn/#{application}"
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-role :web, "129.237.241.107"
-role :app, "129.237.241.107"
-role :db,  "129.237.241.107", :primary => true
+set :host_name, "129.237.241.107"
+
+role :web, :host_name
+role :app, :host_name
+role :db,  :host_name, :primary => true
 
 
 # =============================================================================

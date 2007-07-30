@@ -31,7 +31,8 @@
       <%= link_to image_tag("logo.gif"), :action => "index", :controller => "student" %>
 	<% end %>
       <ul id="top-nav">
-      	<li><%= link_to "home", :controller => "student", :action => "index" %></li>
+		<% controller = admin? ? "admin" : "student" %>
+      	<li><%= link_to "home", :controller => controller, :action => "index" %></li>
 		<% if logged_in? %>
 		<li><%= link_to "logout", :action => "logout", :controller => "account" %></li> 
 		<% else %>
