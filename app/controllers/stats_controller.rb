@@ -2,7 +2,12 @@
 #
 # Graphs are based on the gruff plugin
 class StatsController < ApplicationController
-  require 'gruff'
+  @gruff = true
+  begin
+    require 'gruff'
+  rescue
+    @gruff = false
+  end
   before_filter :set_semester
   layout "admin"
   

@@ -25,9 +25,10 @@
 	
 
 <% end %>
-
-<h4>Posts in Last 30 Days</h4>
-<div class="graph">
-	<img src="<%= url_for :controller => "stats", :action=> "forum_stats" %>" style="border:1px solid #aabcca;" />
-</div>
+<% if @gruff %>
+	<h4>Posts in Last 30 Days</h4>
+	<div class="graph">
+		<img src="<%= url_for :controller => "stats", :action=> "forum_stats" %>" style="border:1px solid #aabcca;" />
+	</div>
+<% end %>
 
