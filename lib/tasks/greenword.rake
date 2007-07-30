@@ -1,33 +1,34 @@
 namespace :greenword do 
   
   # Here is the name and url for your first semester.  Change these to what you would like them to be.
-  SEMESTER_NAME = "Fall 07"
-  SEMESTER_URL  = "fall07" 
+  SEMESTER_NAME = 'Fall 07'
+  SEMESTER_URL  = 'fall07' 
   
   # Here is the name and password for your first administrator.  Please at least change the password.
   # Usernames require the @ as individuals will be using their email accounts as logins.
-  ADMIN_FIRST_NAME  =   "an"
-  ADMIN_LAST_NAME   =   "admin"
-  ADMIN_LOGIN       =   "admin@school.edu"
-  ADMIN_PASSWORD    =   "$t@rBuck$"
-  ADMIN_LANGUAGE    =   "en"    #use es for spanish
+  ADMIN_FIRST_NAME  =   'an'
+  ADMIN_LAST_NAME   =   'admin'
+  ADMIN_LOGIN       =   'admin@school.edu'
+  ADMIN_PASSWORD    =   '$t@rBuck$'
+  ADMIN_LANGUAGE    =   'en'    #use 'es' for spanish
   
   
   
   #------------------------------------------------------------------------
-  # You should not have to change anything below that line.
+  # You should not have to change anything below this line.
   
   
   
   desc "Initial Greenword Setup.  Creates new semester and new admin for semester"
   task(:setup => :environment) do
     begin
+      puts "Creating Semester: #{SEMESTER_NAME}"
       first_semester = Semester.new
       first_semester.name = SEMESTER_NAME
       first_semester.url = SEMESTER_URL
       first_semester.locked = false
       
-      
+      puts "Creating User: #{ADMIN_LOGIN}"
       admin = User.new
       admin.first_name = ADMIN_FIRST_NAME
       admin.last_name = ADMIN_LAST_NAME
