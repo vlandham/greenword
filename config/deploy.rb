@@ -16,7 +16,8 @@ set :application, "gw2"
 set :svn_username, "vlandham"
 set :svn_password, "python13"
 set :repository, "http://tools.assembla.com/svn/#{application}"
-
+set :user, "greenword" # defaults to the currently logged in user
+set :deploy_to, "/home/greenword/apps/#{application}" # defaults to "/u/apps/#{application}"
 # =============================================================================
 # ROLES
 # =============================================================================
@@ -26,11 +27,11 @@ set :repository, "http://tools.assembla.com/svn/#{application}"
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-set :host_name, "129.237.241.108"
+# set :host_name, "129.237.241.108"
 
-role :web, :host_name
-role :app, :host_name
-role :db,  :host_name, :primary => true
+role :web, "129.237.241.108"
+role :app, "129.237.241.108"
+role :db,  "129.237.241.108", :primary => true
 
 set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 
@@ -38,8 +39,7 @@ set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 # =============================================================================
 # OPTIONAL VARIABLES
 # =============================================================================
-set :user, "greenword" # defaults to the currently logged in user
-set :deploy_to, "/home/#{:user}/apps/#{application}" # defaults to "/u/apps/#{application}"
+
             
 # set :scm, :darcs               # defaults to :subversion
 # set :svn, "/path/to/svn"       # defaults to searching the PATH
