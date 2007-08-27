@@ -2,6 +2,8 @@
 # (http://manuals.rubyonrails.com/read/book/17). It allows you to automate
 # (among other things) the deployment of your application.
 
+require 'mongrel_cluster/recipes'
+
 # =============================================================================
 # REQUIRED VARIABLES
 # =============================================================================
@@ -29,6 +31,8 @@ set :host_name, "129.237.241.108"
 role :web, :host_name
 role :app, :host_name
 role :db,  :host_name, :primary => true
+
+set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 
 
 # =============================================================================
