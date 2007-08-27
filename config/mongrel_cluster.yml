@@ -1,6 +1,6 @@
 --- 
 cwd: /home/greenword/apps/gw2
-log_file: log/mongrel.log
+log_file: /log/mongrel.log
 port: "8000"
 environment: production
 group: greenword
