@@ -24,7 +24,7 @@ set :repository, "http://tools.assembla.com/svn/#{application}"
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-set :host_name, "129.237.241.107"
+set :host_name, "129.237.241.108"
 
 role :web, :host_name
 role :app, :host_name
@@ -34,8 +34,9 @@ role :db,  :host_name, :primary => true
 # =============================================================================
 # OPTIONAL VARIABLES
 # =============================================================================
-set :deploy_to, "/home/vlandham/apps/#{application}" # defaults to "/u/apps/#{application}"
-set :user, "vlandham"            # defaults to the currently logged in user
+set :user, "greenword" # defaults to the currently logged in user
+set :deploy_to, "/home/#{:user}/apps/#{application}" # defaults to "/u/apps/#{application}"
+            
 # set :scm, :darcs               # defaults to :subversion
 # set :svn, "/path/to/svn"       # defaults to searching the PATH
 # set :darcs, "/path/to/darcs"   # defaults to searching the PATH
@@ -124,4 +125,39 @@ task :long_deploy do
 
   restart
   enable_web
+end
+
+#  ----------------------------------------
+
+#  below is from http://thinedgeofthewedge.blogspot.com/2007/08/mongrel-and-capistrano-20.html to deal with cap 2
+# use     cap deploy:stop
+#         cap deploy:start
+#         cap deploy:restart
+
+namespace :deploy do
+  namespace :mongrel do
+    [ :stop, :start, :restart ].each do |t|
+      desc "#{t.to_s.capitalize} the mongrel appserver"
+      task t, :roles => :app do
+        #invoke_command checks the use_sudo variable to determine how to run the mongrel_rails command
+        invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_conf}", :via => run_method
+      end
+    end
+  end
+
+  desc "Custom restart task for mongrel cluster"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    deploy.mongrel.restart
+  end
+
+  desc "Custom start task for mongrel cluster"
+  task :start, :roles => :app do
+    deploy.mongrel.start
+  end
+
+  desc "Custom stop task for mongrel cluster"
+  task :stop, :roles => :app do
+    deploy.mongrel.stop
+  end
+
 end
