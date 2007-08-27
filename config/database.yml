@@ -13,7 +13,7 @@
 development:
   adapter: mysql
   database: greenword_development
-  username: root
+  username: greenword
   password:
   host: localhost
   encoding: utf8
@@ -32,7 +32,7 @@ test:
 production:
   adapter: mysql
   database: greenword_production
-  username: root
-  password:
+  username: greenword-pro
+  password: gwPr0
   host: localhost
   encoding: utf8
