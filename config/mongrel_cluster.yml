@@ -3,6 +3,7 @@ cwd: /home/greenword/apps/gw2/current
 log_file: /home/greenword/apps/gw2/current/log/mongrel.log
 port: "8000"
 environment: production
+user: greenword
 group: greenword
 address: 127.0.0.1
 pid_file: tmp/pids/mongrel.pid
