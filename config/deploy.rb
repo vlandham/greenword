@@ -17,7 +17,7 @@ set :svn_username, "vlandham"
 set :svn_password, "python13"
 set :repository, "http://tools.assembla.com/svn/#{application}"
 set :user, "greenword" # defaults to the currently logged in user
-set :deploy_to, "/home/greenword/apps/#{application}" # defaults to "/u/apps/#{application}"
+set :deploy_to, "/var/www/html/#{application}" # defaults to "/u/apps/#{application}"
 # =============================================================================
 # ROLES
 # =============================================================================
